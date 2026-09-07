@@ -34,7 +34,9 @@
 
 <header>
   <div class="wrap">
-    <div class="logo">AMKO<span class="dot">.</span></div>
+    <div class="logo" aria-label="AMKO Engineering Services logo">
+      <img src="./logo.png" alt="AMKO Engineering Services logo">
+    </div>
     <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -57,10 +59,31 @@
         <a class="btn btn-ghost-dark" href="#projects">View all projects</a>
       </div>
     </div>
-    <div class="hero-photo ph tint">
-      <img src="https://picsum.photos/seed/amko-hero-house/900/1125" alt="">
-      <div class="ph-frame"></div>
-      <div class="ph-tag"><svg class="icon" style="width:14px;height:14px"><use href="#ic-home"/></svg>Naya Nazimabad · Complete Construction</div>
+
+    <div class="hero-visual" aria-live="polite">
+      <div class="hero-slideshow">
+        <article class="hero-slide is-active" data-title="Naya Nazimabad" data-copy="Complete construction for a modern family residence in a fast-growing Karachi community.">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt="Completed Naya Nazimabad project">
+        </article>
+        <article class="hero-slide" data-title="DHA Residence" data-copy="Premium residential build with careful detailing, smooth finishes, and practical space planning.">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Completed DHA project">
+        </article>
+        <article class="hero-slide" data-title="Bahria Town Villa" data-copy="Luxury-quality villa project completed with premium materials and balanced design execution.">
+          <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80" alt="Completed Bahria Town villa project">
+        </article>
+      </div>
+
+      <div class="hero-slide-copy">
+        <span class="slide-label">Completed project</span>
+        <h3 id="heroSlideTitle">Naya Nazimabad</h3>
+        <p id="heroSlideCopy">Complete construction for a modern family residence in a fast-growing Karachi community.</p>
+      </div>
+
+      <div class="hero-dots" aria-label="Slideshow navigation">
+        <button class="dot-button is-active" type="button" data-slide="0" aria-label="Show first project"></button>
+        <button class="dot-button" type="button" data-slide="1" aria-label="Show second project"></button>
+        <button class="dot-button" type="button" data-slide="2" aria-label="Show third project"></button>
+      </div>
     </div>
   </div>
   <div class="stats-bar">

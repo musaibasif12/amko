@@ -1,3 +1,40 @@
+const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+const heroDots = Array.from(document.querySelectorAll('.dot-button'));
+const heroTitle = document.getElementById('heroSlideTitle');
+const heroCopy = document.getElementById('heroSlideCopy');
+
+let heroIndex = 0;
+
+function showHeroSlide(index) {
+  if (!heroSlides.length) return;
+
+  heroIndex = (index + heroSlides.length) % heroSlides.length;
+
+  heroSlides.forEach((slide, i) => {
+    slide.classList.toggle('is-active', i === heroIndex);
+  });
+
+  heroDots.forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === heroIndex);
+  });
+
+  const activeSlide = heroSlides[heroIndex];
+  if (activeSlide && heroTitle && heroCopy) {
+    heroTitle.textContent = activeSlide.dataset.title || '';
+    heroCopy.textContent = activeSlide.dataset.copy || '';
+  }
+}
+
+heroDots.forEach((dot) => {
+  dot.addEventListener('click', () => {
+    showHeroSlide(Number(dot.dataset.slide));
+  });
+});
+
+setInterval(() => {
+  showHeroSlide(heroIndex + 1);
+}, 4200);
+
 let selectedRate = 2500;
   function selectType(el){
     document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('active'));
