@@ -2,8 +2,10 @@ const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
 const heroDots = Array.from(document.querySelectorAll('.dot-button'));
 const heroTitle = document.getElementById('heroSlideTitle');
 const heroCopy = document.getElementById('heroSlideCopy');
+const header = document.querySelector('header');
 
 let heroIndex = 0;
+let selectedRate = 2500;
 
 function showHeroSlide(index) {
   if (!heroSlides.length) return;
@@ -31,16 +33,39 @@ heroDots.forEach((dot) => {
   });
 });
 
+const heroTypeButtons = Array.from(document.querySelectorAll('.hero-estimator-type'));
+heroTypeButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const rate = Number(btn.dataset.rate);
+    selectedRate = rate;
+
+    heroTypeButtons.forEach((b) => b.classList.toggle('is-selected', b === btn));
+
+    document.querySelectorAll('.type-opt').forEach((opt) => {
+      opt.classList.toggle('active', Number(opt.dataset.rate) === rate);
+    });
+  });
+});
+
+window.addEventListener('scroll', () => {
+  if (!header) return;
+  header.classList.toggle('is-scrolled', window.scrollY > 24);
+});
+
 setInterval(() => {
   showHeroSlide(heroIndex + 1);
-}, 4200);
+}, 6200);
 
-let selectedRate = 2500;
-  function selectType(el){
-    document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('active'));
-    el.classList.add('active');
-    selectedRate = parseInt(el.getAttribute('data-rate'));
+function selectType(el){
+  document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  selectedRate = parseInt(el.getAttribute('data-rate'));
+
+  const matchingHeroType = heroTypeButtons.find((btn) => Number(btn.dataset.rate) === selectedRate);
+  if (matchingHeroType) {
+    heroTypeButtons.forEach((btn) => btn.classList.toggle('is-selected', btn === matchingHeroType));
   }
+}
   function formatLakh(num){ return (num/100000).toFixed(1) + ' lac'; }
   function calculate(){
     const plotSize = parseFloat(document.getElementById('plotSize').value);
