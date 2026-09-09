@@ -52,9 +52,10 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('is-scrolled', window.scrollY > 24);
 });
 
+const slideHold = 2000;
 setInterval(() => {
   showHeroSlide(heroIndex + 1);
-}, 6200);
+}, slideHold);
 
 function selectType(el){
   document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('active'));
