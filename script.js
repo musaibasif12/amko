@@ -3,9 +3,38 @@ const heroDots = Array.from(document.querySelectorAll('.dot-button'));
 const heroTitle = document.getElementById('heroSlideTitle');
 const heroCopy = document.getElementById('heroSlideCopy');
 const header = document.querySelector('header');
+const serviceCards = Array.from(document.querySelectorAll('.service-card'));
 
 let heroIndex = 0;
 let selectedRate = 2500;
+let lastScrollY = window.scrollY;
+
+function closeServiceCards() {
+  serviceCards.forEach((card) => {
+    card.classList.remove('is-open');
+    card.setAttribute('aria-expanded', 'false');
+  });
+}
+
+function toggleServiceCard(card) {
+  const isOpen = !card.classList.contains('is-open');
+  closeServiceCards();
+
+  if (!isOpen) return;
+
+  card.classList.add('is-open');
+  card.setAttribute('aria-expanded', String(isOpen));
+}
+
+serviceCards.forEach((card) => {
+  card.addEventListener('click', () => toggleServiceCard(card));
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleServiceCard(card);
+    }
+  });
+});
 
 function showHeroSlide(index) {
   if (!heroSlides.length) return;
@@ -50,6 +79,12 @@ heroTypeButtons.forEach((btn) => {
 window.addEventListener('scroll', () => {
   if (!header) return;
   header.classList.toggle('is-scrolled', window.scrollY > 24);
+
+  if (window.scrollY < lastScrollY) {
+    closeServiceCards();
+  }
+
+  lastScrollY = window.scrollY;
 });
 
 const slideHold = 2000;
