@@ -1,480 +1,962 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMKO Engineering Services — Karachi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMKO Engineering Services — Karachi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- ============ ICON DEFS (referenced via <use>) ============ -->
+    <svg width="0" height="0" style="position: absolute">
+      <defs>
+        <symbol id="ic-check" viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12" />
+        </symbol>
+        <symbol id="ic-arrow" viewBox="0 0 24 24">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </symbol>
+        <symbol id="ic-shield" viewBox="0 0 24 24">
+          <path d="M12 2 4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5l-8-3Z" />
+        </symbol>
+        <symbol id="ic-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <polyline points="12 7 12 12 16 14" />
+        </symbol>
+        <symbol id="ic-map" viewBox="0 0 24 24">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+          <circle cx="12" cy="10" r="3" />
+        </symbol>
+        <symbol id="ic-home" viewBox="0 0 24 24">
+          <path d="M3 11 12 3l9 8" />
+          <path d="M5 10v10h14V10" />
+        </symbol>
+        <symbol id="ic-plan" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="1" />
+          <path d="M3 9h18M9 21V9" />
+        </symbol>
+        <symbol id="ic-tool" viewBox="0 0 24 24">
+          <path d="m14.7 6.3 3 3L8 19H5v-3Z" />
+          <path d="M17.5 3.5c1 1 2 2 2 3.5l-3-3c1.5 0 2.5 1 2.5 1Z" />
+        </symbol>
+        <symbol id="ic-hammer" viewBox="0 0 24 24">
+          <path d="m15 12-8.5 8.5a2 2 0 0 1-3-3L12 9" />
+          <path d="M17.5 3 21 6.5 15 12l-3.5-3.5Z" />
+        </symbol>
+        <symbol id="ic-award" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="5" />
+          <path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5" />
+        </symbol>
+        <symbol id="ic-layers" viewBox="0 0 24 24">
+          <polygon points="12 2 2 8 12 14 22 8 12 2" />
+          <polyline points="2 14 12 20 22 14" />
+        </symbol>
+        <symbol id="ic-percent" viewBox="0 0 24 24">
+          <line x1="19" y1="5" x2="5" y2="19" />
+          <circle cx="6.5" cy="6.5" r="2.5" />
+          <circle cx="17.5" cy="17.5" r="2.5" />
+        </symbol>
+        <symbol id="ic-phone" viewBox="0 0 24 24">
+          <path
+            d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.5 2L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2-.5c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"
+          />
+        </symbol>
+        <symbol id="ic-mail" viewBox="0 0 24 24">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <polyline points="2 7 12 13 22 7" />
+        </symbol>
+        <symbol id="ic-star" viewBox="0 0 24 24">
+          <polygon
+            points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9"
+          />
+        </symbol>
+      </defs>
+    </svg>
 
-<!-- ============ ICON DEFS (referenced via <use>) ============ -->
-<svg width="0" height="0" style="position:absolute">
-<defs>
-<symbol id="ic-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
-<symbol id="ic-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
-<symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5l-8-3Z"/></symbol>
-<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></symbol>
-<symbol id="ic-map" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
-<symbol id="ic-home" viewBox="0 0 24 24"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/></symbol>
-<symbol id="ic-plan" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></symbol>
-<symbol id="ic-tool" viewBox="0 0 24 24"><path d="m14.7 6.3 3 3L8 19H5v-3Z"/><path d="M17.5 3.5c1 1 2 2 2 3.5l-3-3c1.5 0 2.5 1 2.5 1Z"/></symbol>
-<symbol id="ic-hammer" viewBox="0 0 24 24"><path d="m15 12-8.5 8.5a2 2 0 0 1-3-3L12 9"/><path d="M17.5 3 21 6.5 15 12l-3.5-3.5Z"/></symbol>
-<symbol id="ic-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></symbol>
-<symbol id="ic-layers" viewBox="0 0 24 24"><polygon points="12 2 2 8 12 14 22 8 12 2"/><polyline points="2 14 12 20 22 14"/></symbol>
-<symbol id="ic-percent" viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
-<symbol id="ic-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.5 2L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2-.5c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"/></symbol>
-<symbol id="ic-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 7 12 13 22 7"/></symbol>
-<symbol id="ic-star" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9"/></symbol>
-</defs>
-</svg>
-
-<header>
-  <div class="wrap">
-    <div class="logo" aria-label="AMKO Engineering Services logo">
-      <img src="./logo.png" alt="AMKO Engineering Services logo">
-    </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="btn btn-gold" onclick="window.open('https://wa.me/923222538025','_blank')">Start Your Project</button>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <div class="hero-badge"><span class="dot-live"></span>150+ Homes Built Across Karachi</div>
-      <h1>Trusted to build<br><em>Karachi homes.</em></h1>
-      <p>Residential construction across DHA, Naya Nazimabad, Bahria Town and Scheme 33 — built on time, with transparent pricing.</p>
-      <div class="hero-actions">
-        <a class="btn btn-gold" href="#estimator"><svg class="icon" style="color:var(--ink-900)"><use href="#ic-arrow"/></svg>Start your project</a>
-        <a class="btn btn-ghost-dark" href="#projects">View all projects</a>
-      </div>
-    </div>
-
-    <div class="hero-visual" aria-live="polite">
-      <div class="hero-slideshow">
-        <article class="hero-slide is-active" data-title="Naya Nazimabad" data-copy="Complete construction for a modern family residence in a fast-growing Karachi community.">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt="Completed Naya Nazimabad project">
-        </article>
-        <article class="hero-slide" data-title="DHA Residence" data-copy="Premium residential build with careful detailing, smooth finishes, and practical space planning.">
-          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Completed DHA project">
-        </article>
-        <article class="hero-slide" data-title="Bahria Town Villa" data-copy="Luxury-quality villa project completed with premium materials and balanced design execution.">
-          <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80" alt="Completed Bahria Town villa project">
-        </article>
-      </div>
-
-      <div class="hero-slide-copy">
-        <span class="slide-label">Completed project</span>
-        <h3 id="heroSlideTitle">Naya Nazimabad</h3>
-        <p id="heroSlideCopy">Complete construction for a modern family residence in a fast-growing Karachi community.</p>
-      </div>
-
-      <div class="hero-dots" aria-label="Slideshow navigation">
-        <button class="dot-button is-active" type="button" data-slide="0" aria-label="Show first project"></button>
-        <button class="dot-button" type="button" data-slide="1" aria-label="Show second project"></button>
-        <button class="dot-button" type="button" data-slide="2" aria-label="Show third project"></button>
-      </div>
-    </div>
-  </div>
-  <div class="stats-bar">
-    <div class="wrap">
-      <div class="stat-cell"><svg class="icon"><use href="#ic-award"/></svg><div class="num">20+</div><div class="lbl">Years of experience</div></div>
-      <div class="stat-cell"><svg class="icon"><use href="#ic-home"/></svg><div class="num">150+</div><div class="lbl">Projects completed</div></div>
-      <div class="stat-cell"><svg class="icon"><use href="#ic-map"/></svg><div class="num">10+</div><div class="lbl">Areas served</div></div>
-      <div class="stat-cell"><svg class="icon"><use href="#ic-clock"/></svg><div class="num">96%</div><div class="lbl">On-time delivery</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="services">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Our Services</div>
-      <h2>Complete construction solutions for your home</h2>
-      <p>From planning and design to construction and finishing — every service is delivered and supervised in-house.</p>
-    </div>
-    <div class="service-grid">
-      <div class="service-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-home"/></svg></div>
-        <h3>Fully Finished Construction</h3>
-        <p>Complete construction from foundation to handover, with material and finishing included.</p>
-        <span class="link">Talk to us <svg class="icon"><use href="#ic-arrow"/></svg></span>
-      </div>
-      <div class="service-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-layers"/></svg></div>
-        <h3>Grey Structure</h3>
-        <p>RCC frame, columns and structure with material — ready for you to finish on your own timeline.</p>
-        <span class="link">Talk to us <svg class="icon"><use href="#ic-arrow"/></svg></span>
-      </div>
-      <div class="service-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-plan"/></svg></div>
-        <h3>Design &amp; Planning</h3>
-        <p>Turn your ideas into a practical, well-planned, build-ready home design.</p>
-        <span class="link">Talk to us <svg class="icon"><use href="#ic-arrow"/></svg></span>
-      </div>
-      <div class="service-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-tool"/></svg></div>
-        <h3>Home Renovation</h3>
-        <p>Upgrade and improve your existing home with practical design and quality workmanship.</p>
-        <span class="link">Talk to us <svg class="icon"><use href="#ic-arrow"/></svg></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="about-top">
-      <div>
-        <div class="eyebrow on-dark">About Us</div>
-        <h2 style="font-size:clamp(28px,3.6vw,38px); margin-bottom:var(--sp-4); color:var(--cream-100);">A commitment to every project</h2>
-        <p>AMKO Engineering Services has over 20+ years of experience delivering quality residential construction across Karachi. From design and planning to final handover, every project is personally supervised by our engineering team.</p>
-        <ul class="about-checks">
-          <li><svg class="icon"><use href="#ic-check"/></svg>Reliable workmanship on every site</li>
-          <li><svg class="icon"><use href="#ic-check"/></svg>Transparent communication, start to finish</li>
-          <li><svg class="icon"><use href="#ic-check"/></svg>Lasting quality, not just a fast handover</li>
-        </ul>
-      </div>
-      <div class="founder-card">
-        <div class="founder-photo ph tint">
-          <img src="https://picsum.photos/seed/amko-founder/700/525" alt="">
+    <header>
+      <div class="wrap">
+        <div class="logo" aria-label="AMKO Engineering Services logo">
+          <img src="./logo.png" alt="AMKO Engineering Services logo" />
         </div>
-        <div class="founder-info">
-          <div class="founder-name">Mohammed Asif</div>
-          <div class="founder-title">CEO &amp; Civil Engineer</div>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button
+          class="btn btn-gold"
+          onclick="window.open('https://wa.me/923222538025', '_blank')"
+        >
+          Start Your Project
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <div class="hero-badge">
+            <span class="dot-live"></span>200+ Homes Built Across Karachi
+          </div>
+          <h1>Trusted to build<br /><em>Karachi homes.</em></h1>
+          <p>
+            Residential construction across DHA, Naya Nazimabad, Bahria Town and
+            Scheme 33 — built on time, with transparent pricing.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#estimator"
+              ><svg class="icon" style="color: var(--ink-900)">
+                <use href="#ic-arrow" /></svg
+              >Start your project</a
+            >
+            <a class="btn btn-ghost-dark" href="#projects">View all projects</a>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="eyebrow on-dark">Meet Our Professional Team</div>
-    <div class="team-row">
-      <div class="team-card">
-        <div class="team-photo ph tint"><img src="https://picsum.photos/seed/amko-team-eng/500/500" alt=""></div>
-        <div class="team-info"><h4>Civil Engineer</h4><div class="role">Site design &amp; structural planning</div></div>
-      </div>
-      <div class="team-card">
-        <div class="team-photo ph tint"><img src="https://picsum.photos/seed/amko-team-sup/500/500" alt=""></div>
-        <div class="team-info"><h4>Site Supervisor</h4><div class="role">Day-to-day construction oversight</div></div>
-      </div>
-      <div class="team-card">
-        <div class="team-photo ph tint"><img src="https://picsum.photos/seed/amko-team-acc/500/500" alt=""></div>
-        <div class="team-info"><h4>Account Manager</h4><div class="role">Client communication &amp; scheduling</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="projects">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Selected Projects</div>
-      <h2>Homes built with purpose</h2>
-      <p>A selection of residential construction completed across Karachi.</p>
-    </div>
-    <div class="project-grid">
+        <div class="hero-visual" aria-live="polite">
+          <div class="hero-slideshow">
+            <article
+              class="hero-slide is-active"
+              data-title="Naya Nazimabad"
+              data-copy="Complete construction for a modern family residence in a fast-growing Karachi community."
+            >
+              <img
+                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+                alt="Completed Naya Nazimabad project"
+              />
+            </article>
+            <article
+              class="hero-slide"
+              data-title="DHA Residence"
+              data-copy="Premium residential build with careful detailing, smooth finishes, and practical space planning."
+            >
+              <img
+                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+                alt="Completed DHA project"
+              />
+            </article>
+            <article
+              class="hero-slide"
+              data-title="Bahria Town Villa"
+              data-copy="Luxury-quality villa project completed with premium materials and balanced design execution."
+            >
+              <img
+                src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80"
+                alt="Completed Bahria Town villa project"
+              />
+            </article>
+          </div>
 
-      <div class="project-card">
-        <div class="project-photo ph"><img src="https://picsum.photos/seed/amko-proj-1/600/450" alt=""><span class="ph-badge">Fully Finished</span></div>
-        <div class="project-body">
-          <h3>Naya Nazimabad</h3>
-          <div class="project-sub">400 sq. yd. plot</div>
-          <div class="spec-rows">
-            <div class="spec-row"><span class="k">Floors</span><span class="v">Ground + 1</span></div>
-            <div class="spec-row"><span class="k">Type</span><span class="v">Complete, with material</span></div>
+          <div class="hero-slide-copy">
+            <span class="slide-label">Completed project</span>
+            <h3 id="heroSlideTitle">Naya Nazimabad</h3>
+            <p id="heroSlideCopy">
+              Complete construction for a modern family residence in a
+              fast-growing Karachi community.
+            </p>
+          </div>
+
+          <div class="hero-dots" aria-label="Slideshow navigation">
+            <button
+              class="dot-button is-active"
+              type="button"
+              data-slide="0"
+              aria-label="Show first project"
+            ></button>
+            <button
+              class="dot-button"
+              type="button"
+              data-slide="1"
+              aria-label="Show second project"
+            ></button>
+            <button
+              class="dot-button"
+              type="button"
+              data-slide="2"
+              aria-label="Show third project"
+            ></button>
           </div>
         </div>
       </div>
-
-      <div class="project-card">
-        <div class="project-photo ph"><img src="https://picsum.photos/seed/amko-proj-2/600/450" alt=""><span class="ph-badge">Fully Finished</span></div>
-        <div class="project-body">
-          <h3>Naya Nazimabad, Block A</h3>
-          <div class="project-sub">240 sq. yd. plot</div>
-          <div class="spec-rows">
-            <div class="spec-row"><span class="k">Floors</span><span class="v">Ground + 1</span></div>
-            <div class="spec-row"><span class="k">Type</span><span class="v">Complete, with material</span></div>
+      <div class="stats-bar">
+        <div class="wrap">
+          <div class="stat-cell">
+            <svg class="icon"><use href="#ic-award" /></svg>
+            <div class="num-wrap">
+              <div class="num">20+</div>
+              <div class="lbl">Years of experience</div>
+            </div>
+          </div>
+          <div class="stat-cell">
+            <svg class="icon"><use href="#ic-home" /></svg>
+            <div class="num-wrap">
+              <div class="num">150+</div>
+              <div class="lbl">Projects completed</div>
+            </div>
+          </div>
+          <div class="stat-cell">
+            <svg class="icon"><use href="#ic-map" /></svg>
+            <div class="num-wrap">
+              <div class="num">10+</div>
+              <div class="lbl">Areas served</div>
+            </div>
+          </div>
+          <div class="stat-cell">
+            <svg class="icon"><use href="#ic-clock" /></svg>
+            <div class="num-wrap">
+              <div class="num">96%</div>
+              <div class="lbl">On-time delivery</div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <div class="project-photo ph"><img src="https://picsum.photos/seed/amko-proj-3/600/450" alt=""><span class="ph-badge">Fully Finished</span></div>
-        <div class="project-body">
-          <h3>Meerut Society</h3>
-          <div class="project-sub">240 sq. yd. plot</div>
-          <div class="spec-rows">
-            <div class="spec-row"><span class="k">Floors</span><span class="v">Ground + 1</span></div>
-            <div class="spec-row"><span class="k">Type</span><span class="v">Complete, with material</span></div>
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Our Services</div>
+          <h2>Complete construction solutions for your home</h2>
+          <p>
+            From planning and design to construction and finishing — every
+            service is delivered and supervised in-house.
+          </p>
+        </div>
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-home" /></svg>
+            </div>
+            <h3>Fully Finished Construction</h3>
+            <p>
+              Complete construction from foundation to handover, with material
+              and finishing included.
+            </p>
+            <span class="link"
+              >Talk to us <svg class="icon"><use href="#ic-arrow" /></svg
+            ></span>
+          </div>
+          <div class="service-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-layers" /></svg>
+            </div>
+            <h3>Grey Structure</h3>
+            <p>
+              RCC frame, columns and structure with material — ready for you to
+              finish on your own timeline.
+            </p>
+            <span class="link"
+              >Talk to us <svg class="icon"><use href="#ic-arrow" /></svg
+            ></span>
+          </div>
+          <div class="service-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-plan" /></svg>
+            </div>
+            <h3>Design &amp; Planning</h3>
+            <p>
+              Turn your ideas into a practical, well-planned, build-ready home
+              design.
+            </p>
+            <span class="link"
+              >Talk to us <svg class="icon"><use href="#ic-arrow" /></svg
+            ></span>
+          </div>
+          <div class="service-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-tool" /></svg>
+            </div>
+            <h3>Home Renovation</h3>
+            <p>
+              Upgrade and improve your existing home with practical design and
+              quality workmanship.
+            </p>
+            <span class="link"
+              >Talk to us <svg class="icon"><use href="#ic-arrow" /></svg
+            ></span>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <div class="project-photo ph"><img src="https://picsum.photos/seed/amko-proj-4/600/450" alt=""><span class="ph-badge">Fully Finished</span></div>
-        <div class="project-body">
-          <h3>Naya Nazimabad</h3>
-          <div class="project-sub">160 sq. yd. plot</div>
-          <div class="spec-rows">
-            <div class="spec-row"><span class="k">Floors</span><span class="v">Ground + 1</span></div>
-            <div class="spec-row"><span class="k">Type</span><span class="v">Complete, with material</span></div>
+    <section class="about" id="about">
+      <div class="wrap">
+        <div class="about-top">
+          <div>
+            <div class="eyebrow on-dark">About Us</div>
+            <h2
+              style="
+                font-size: clamp(28px, 3.6vw, 38px);
+                margin-bottom: var(--sp-4);
+                color: var(--cream-100);
+              "
+            >
+              A commitment to every project
+            </h2>
+            <p>
+              AMKO Engineering Services has over 20+ years of experience
+              delivering quality residential construction across Karachi. From
+              design and planning to final handover, every project is personally
+              supervised by our engineering team.
+            </p>
+            <ul class="about-checks">
+              <li>
+                <svg class="icon"><use href="#ic-check" /></svg>Reliable
+                workmanship on every site
+              </li>
+              <li>
+                <svg class="icon"><use href="#ic-check" /></svg>Transparent
+                communication, start to finish
+              </li>
+              <li>
+                <svg class="icon"><use href="#ic-check" /></svg>Lasting quality,
+                not just a fast handover
+              </li>
+            </ul>
+          </div>
+          <div class="founder-card">
+            <div class="founder-photo ph tint">
+              <img
+                src="https://picsum.photos/seed/amko-founder/700/525"
+                alt=""
+              />
+            </div>
+            <div class="founder-info">
+              <div class="founder-name">Mohammed Asif</div>
+              <div class="founder-title">CEO &amp; Civil Engineer</div>
+            </div>
+          </div>
+        </div>
+        <div class="eyebrow on-dark">Meet Our Professional Team</div>
+        <div class="team-row">
+          <div class="team-card">
+            <div class="team-photo ph tint">
+              <img
+                src="https://picsum.photos/seed/amko-team-eng/500/500"
+                alt=""
+              />
+            </div>
+            <div class="team-info">
+              <h4>Civil Engineer</h4>
+              <div class="role">Site design &amp; structural planning</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo ph tint">
+              <img
+                src="https://picsum.photos/seed/amko-team-sup/500/500"
+                alt=""
+              />
+            </div>
+            <div class="team-info">
+              <h4>Site Supervisor</h4>
+              <div class="role">Day-to-day construction oversight</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo ph tint">
+              <img
+                src="https://picsum.photos/seed/amko-team-acc/500/500"
+                alt=""
+              />
+            </div>
+            <div class="team-info">
+              <h4>Account Manager</h4>
+              <div class="role">Client communication &amp; scheduling</div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <div class="project-photo ph"><img src="https://picsum.photos/seed/amko-proj-5/600/450" alt=""><span class="ph-badge">Fully Finished</span></div>
-        <div class="project-body">
-          <h3>Naya Nazimabad</h3>
-          <div class="project-sub">120 sq. yd. plot</div>
-          <div class="spec-rows">
-            <div class="spec-row"><span class="k">Floors</span><span class="v">Ground + 1</span></div>
-            <div class="spec-row"><span class="k">Type</span><span class="v">Complete, with material</span></div>
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Selected Projects</div>
+          <h2>Homes built with purpose</h2>
+          <p>
+            A selection of residential construction completed across Karachi.
+          </p>
+        </div>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-1/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad</h3>
+              <div class="project-sub">400 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-2/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad, Block A</h3>
+              <div class="project-sub">240 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-3/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Meerut Society</h3>
+              <div class="project-sub">240 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-4/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad</h3>
+              <div class="project-sub">160 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-5/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad</h3>
+              <div class="project-sub">120 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </div>
-</section>
-
-<section class="why">
-  <div class="wrap">
-    <div class="section-head on-dark">
-      <div class="eyebrow on-dark">Why Homeowners Choose AMKO</div>
-      <h2 style="color:var(--cream-100);">Clear pricing. Supervision.<br>Reliable construction.</h2>
-      <p>From the first estimate to final handover, we keep your project clear, supervised, and on track.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-shield"/></svg></div>
-        <h3>Transparent, upfront pricing</h3>
-        <p>Cost and timeline agreed in writing before a single brick moves. No surprise charges mid-project.</p>
-        <div class="why-tags"><span>Clear estimates</span><span>Defined scope</span><span>No hidden charges</span></div>
-      </div>
-      <div class="why-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-clock"/></svg></div>
-        <h3>On-time delivery</h3>
-        <p>96% of our projects handed over on the promised date, with schedules planned around Karachi's supply timelines.</p>
-        <div class="why-tags"><span>Planned schedules</span><span>Progress monitoring</span></div>
-      </div>
-      <div class="why-card">
-        <div class="ic-box"><svg class="icon"><use href="#ic-map"/></svg></div>
-        <h3>20 years of local expertise</h3>
-        <p>DHA, Naya Nazimabad, Bahria Town and Scheme 33 — we know each area's bylaws, soil and approvals.</p>
-        <div class="why-tags"><span>Local approvals</span><span>Site conditions</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="cta-banner">
-  <div class="ph tint"><img src="https://picsum.photos/seed/amko-cta-site/1600/600" alt=""></div>
-  <div class="cta-content">
-    <h2>Your home is a major investment</h2>
-    <p>We believe the construction process should be clear, well-supervised, and professionally managed from start to finish.</p>
-    <a class="btn btn-gold" href="#estimator">Start your project</a>
-  </div>
-</div>
-
-<section class="estimator" id="estimator">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Cost Estimator</div>
-      <h2>What might your project cost?</h2>
-      <p>Get a realistic range in seconds. This isn't a fixed quote — it's a starting point for a real conversation with our team.</p>
-    </div>
-    <div class="estimator-box">
-      <div class="estimator-form">
-        <div class="field">
-          <label for="plotSize">Plot size (sq. yd.)</label>
-          <input type="number" id="plotSize" placeholder="e.g. 240" min="20">
+    <section class="why">
+      <div class="wrap">
+        <div class="section-head on-dark">
+          <div class="eyebrow on-dark">Why Homeowners Choose AMKO</div>
+          <h2 style="color: var(--cream-100)">
+            Clear pricing. Supervision.<br />Reliable construction.
+          </h2>
+          <p>
+            From the first estimate to final handover, we keep your project
+            clear, supervised, and on track.
+          </p>
         </div>
-        <div class="field">
-          <label for="floors">Floors</label>
-          <select id="floors">
-            <option value="1">Ground Floor</option>
-            <option value="2" selected>Ground + 1</option>
-            <option value="3">Ground + 2</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="location">Location</label>
-          <select id="location">
-            <option>DHA</option><option>Naya Nazimabad</option><option>Bahria Town</option>
-            <option>Scheme 33</option><option>Saadi Town</option><option>Saadi Garden</option>
-            <option>Meerut Society</option><option>Other area in Karachi</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Construction type</label>
-          <div class="type-toggle">
-            <div class="type-opt active" data-rate="2500" onclick="selectType(this)">Grey Structure<br>with material</div>
-            <div class="type-opt" data-rate="4500" onclick="selectType(this)">Complete / Turnkey<br>with material</div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-shield" /></svg>
+            </div>
+            <h3>Transparent, upfront pricing</h3>
+            <p>
+              Cost and timeline agreed in writing before a single brick moves.
+              No surprise charges mid-project.
+            </p>
+            <div class="why-tags">
+              <span>Clear estimates</span><span>Defined scope</span
+              ><span>No hidden charges</span>
+            </div>
+          </div>
+          <div class="why-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-clock" /></svg>
+            </div>
+            <h3>On-time delivery</h3>
+            <p>
+              96% of our projects handed over on the promised date, with
+              schedules planned around Karachi's supply timelines.
+            </p>
+            <div class="why-tags">
+              <span>Planned schedules</span><span>Progress monitoring</span>
+            </div>
+          </div>
+          <div class="why-card">
+            <div class="ic-box">
+              <svg class="icon"><use href="#ic-map" /></svg>
+            </div>
+            <h3>20 years of local expertise</h3>
+            <p>
+              DHA, Naya Nazimabad, Bahria Town and Scheme 33 — we know each
+              area's bylaws, soil and approvals.
+            </p>
+            <div class="why-tags">
+              <span>Local approvals</span><span>Site conditions</span>
+            </div>
           </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">Calculate estimate</button>
       </div>
-      <div class="estimator-result">
-        <div id="resultEmpty" class="result-empty">Fill in your plot details and calculate to see an estimated range.</div>
-        <div id="resultBox" style="display:none;">
-          <div class="result-label">Estimated Construction Range</div>
-          <div class="result-range" id="resultRange"></div>
-          <div class="result-disclaimer">Final cost depends on design, specifications, materials and site conditions. This range is a starting estimate, not a quotation.</div>
-          <button class="btn btn-gold wa-btn show" id="waBtn" onclick="sendToWhatsApp()"><svg class="icon" style="color:var(--ink-900)"><use href="#ic-phone"/></svg>Get a personalized estimate</button>
+    </section>
+
+    <div class="cta-banner">
+      <div class="ph tint">
+        <img src="https://picsum.photos/seed/amko-cta-site/1600/600" alt="" />
+      </div>
+      <div class="cta-content">
+        <h2>Your home is a major investment</h2>
+        <p>
+          We believe the construction process should be clear, well-supervised,
+          and professionally managed from start to finish.
+        </p>
+        <a class="btn btn-gold" href="#estimator">Start your project</a>
+      </div>
+    </div>
+
+    <section class="estimator" id="estimator">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Cost Estimator</div>
+          <h2>What might your project cost?</h2>
+          <p>
+            Get a realistic range in seconds. This isn't a fixed quote — it's a
+            starting point for a real conversation with our team.
+          </p>
+        </div>
+        <div class="estimator-box">
+          <div class="estimator-form">
+            <div class="field">
+              <label for="plotSize">Plot size (sq. yd.)</label>
+              <input
+                type="number"
+                id="plotSize"
+                placeholder="e.g. 240"
+                min="20"
+              />
+            </div>
+            <div class="field">
+              <label for="floors">Floors</label>
+              <select id="floors">
+                <option value="1">Ground Floor</option>
+                <option value="2" selected>Ground + 1</option>
+                <option value="3">Ground + 2</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="location">Location</label>
+              <select id="location">
+                <option>DHA</option>
+                <option>Naya Nazimabad</option>
+                <option>Bahria Town</option>
+                <option>Scheme 33</option>
+                <option>Saadi Town</option>
+                <option>Saadi Garden</option>
+                <option>Meerut Society</option>
+                <option>Other area in Karachi</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Construction type</label>
+              <div class="type-toggle">
+                <div
+                  class="type-opt active"
+                  data-rate="2500"
+                  onclick="selectType(this)"
+                >
+                  Grey Structure<br />with material
+                </div>
+                <div
+                  class="type-opt"
+                  data-rate="4500"
+                  onclick="selectType(this)"
+                >
+                  Complete / Turnkey<br />with material
+                </div>
+              </div>
+            </div>
+            <button class="calc-btn" onclick="calculate()">
+              Calculate estimate
+            </button>
+          </div>
+          <div class="estimator-result">
+            <div id="resultEmpty" class="result-empty">
+              Fill in your plot details and calculate to see an estimated range.
+            </div>
+            <div id="resultBox" style="display: none">
+              <div class="result-label">Estimated Construction Range</div>
+              <div class="result-range" id="resultRange"></div>
+              <div class="result-disclaimer">
+                Final cost depends on design, specifications, materials and site
+                conditions. This range is a starting estimate, not a quotation.
+              </div>
+              <button
+                class="btn btn-gold wa-btn show"
+                id="waBtn"
+                onclick="sendToWhatsApp()"
+              >
+                <svg class="icon" style="color: var(--ink-900)">
+                  <use href="#ic-phone" /></svg
+                >Get a personalized estimate
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="testimonials" id="testimonials">
-  <div class="wrap">
-    <div class="section-head on-dark">
-      <div class="eyebrow on-dark">What Our Clients Say</div>
-      <h2 style="color:var(--cream-100);">Real projects. Real feedback.</h2>
-    </div>
-    <div class="test-grid">
-      <div class="test-card">
-        <div class="test-stars"><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg></div>
-        <p>The project was completed on the promised timeline, and the final cost matched what we agreed. The team kept us informed throughout the process.</p>
-        <div class="test-foot"><div class="test-avatar">M</div><div><div class="test-name">M. Musaib</div><div class="test-loc">DHA Phase 8</div></div></div>
-      </div>
-      <div class="test-card">
-        <div class="test-stars"><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg></div>
-        <p>Professional, reliable, and transparent throughout the project. The work was completed on time, within the agreed budget.</p>
-        <div class="test-foot"><div class="test-avatar">K</div><div><div class="test-name">Kabeer Khan</div><div class="test-loc">DHA Phase 8</div></div></div>
-      </div>
-      <div class="test-card">
-        <div class="test-stars"><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg><svg class="icon"><use href="#ic-star"/></svg></div>
-        <p>A smooth experience from start to finish. The team was responsive, professional, and delivered exactly what we expected.</p>
-        <div class="test-foot"><div class="test-avatar">R</div><div><div class="test-name">Rafay Nauman</div><div class="test-loc">Naya Nazimabad</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap">
-    <div class="section-head center">
-      <div class="eyebrow" style="justify-content:center">FAQs</div>
-      <h2>Clear answers, confident decisions</h2>
-      <p>Get clear answers to common questions about pricing, timelines, materials, and supervision.</p>
-    </div>
-    <div class="faq-list">
-      <details open>
-        <summary>What construction services does AMKO provide?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Grey structure construction, complete/turnkey construction with material, design &amp; planning, and home renovation.</p>
-      </details>
-      <details>
-        <summary>Do you handle complete house construction?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Yes — from grey structure to fully finished, turnkey construction with material, all the way to handover.</p>
-      </details>
-      <details>
-        <summary>How much does house construction cost per square foot?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Grey structure starts around Rs 2,500/sq. ft., and complete/turnkey construction around Rs 4,500/sq. ft. Final pricing depends on design and material specifications — use the estimator above for a range on your plot.</p>
-      </details>
-      <details>
-        <summary>Which areas does AMKO serve?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>DHA, Naya Nazimabad, Bahria Town, Scheme 33, Saadi Town, Saadi Garden and nearby areas across Karachi.</p>
-      </details>
-      <details>
-        <summary>How long does it take to complete a house?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Timelines depend on plot size and scope of work. We agree a realistic schedule with you in writing before construction starts.</p>
-      </details>
-      <details>
-        <summary>Can I use my own architectural design or map?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Yes, you're welcome to bring your own approved map or design. If you don't have one yet, our team can handle design and planning for you.</p>
-      </details>
-      <details>
-        <summary>How do you ensure construction quality?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Every project is personally supervised by our engineering team, with defined material specifications and scope agreed before work begins.</p>
-      </details>
-      <details>
-        <summary>Can I visit your completed projects?<span class="faq-icon"><svg class="icon"><use href="#ic-arrow"/></svg></span></summary>
-        <p>Yes — we're happy to arrange a visit to a completed or ongoing project so you can see the work firsthand before deciding.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="section-head on-dark">
-      <div class="eyebrow on-dark">Start Your Project</div>
-      <h2 style="color:var(--cream-100);">Let's build your vision</h2>
-      <p>Tell us about your project, and our team will guide you through the next steps.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-form">
-        <div class="field"><label for="cName">Your name</label><input type="text" id="cName" placeholder="Enter your full name"></div>
-        <div class="field"><label for="cPhone">Phone number</label><input type="text" id="cPhone" placeholder="+92 3XX XXXXXXX"></div>
-        <div class="field"><label for="cArea">Area / location</label><input type="text" id="cArea" placeholder="e.g. DHA Phase 6, Karachi"></div>
-        <div class="field">
-          <label for="cType">Project type</label>
-          <select id="cType">
-            <option>Fully Finished Construction</option><option>Grey Structure</option>
-            <option>Design &amp; Planning</option><option>Renovation</option>
-          </select>
+    <section class="testimonials" id="testimonials">
+      <div class="wrap">
+        <div class="section-head on-dark">
+          <div class="eyebrow on-dark">What Our Clients Say</div>
+          <h2 style="color: var(--cream-100)">Real projects. Real feedback.</h2>
         </div>
-        <button class="calc-btn" onclick="sendContactForm()">Request a free quote</button>
-      </div>
-      <div>
-        <div class="direct-card">
-          <div class="ic-box"><svg class="icon"><use href="#ic-phone"/></svg></div>
-          <div><div class="lbl">Start a WhatsApp chat</div><a class="val" href="https://wa.me/923222538025" target="_blank">+92 322 2538025</a></div>
-        </div>
-        <div class="direct-card">
-          <div class="ic-box"><svg class="icon"><use href="#ic-mail"/></svg></div>
-          <div><div class="lbl">Send us an email</div><a class="val" href="mailto:asif.amko@gmail.com">asif.amko@gmail.com</a></div>
-        </div>
-        <div class="map-block ph">
-          <img src="https://picsum.photos/seed/amko-map/700/300" alt="">
-          <div class="ph-tag"><svg class="icon" style="width:14px;height:14px"><use href="#ic-map"/></svg>Office#02, E 6/3 B Nazimabad #02, Karachi</div>
+        <div class="test-grid">
+          <div class="test-card">
+            <div class="test-stars">
+              <svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg>
+            </div>
+            <p>
+              The project was completed on the promised timeline, and the final
+              cost matched what we agreed. The team kept us informed throughout
+              the process.
+            </p>
+            <div class="test-foot">
+              <div class="test-avatar">M</div>
+              <div>
+                <div class="test-name">M. Musaib</div>
+                <div class="test-loc">DHA Phase 8</div>
+              </div>
+            </div>
+          </div>
+          <div class="test-card">
+            <div class="test-stars">
+              <svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg>
+            </div>
+            <p>
+              Professional, reliable, and transparent throughout the project.
+              The work was completed on time, within the agreed budget.
+            </p>
+            <div class="test-foot">
+              <div class="test-avatar">K</div>
+              <div>
+                <div class="test-name">Kabeer Khan</div>
+                <div class="test-loc">DHA Phase 8</div>
+              </div>
+            </div>
+          </div>
+          <div class="test-card">
+            <div class="test-stars">
+              <svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg
+              ><svg class="icon"><use href="#ic-star" /></svg>
+            </div>
+            <p>
+              A smooth experience from start to finish. The team was responsive,
+              professional, and delivered exactly what we expected.
+            </p>
+            <div class="test-foot">
+              <div class="test-avatar">R</div>
+              <div>
+                <div class="test-name">Rafay Nauman</div>
+                <div class="test-loc">Naya Nazimabad</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-brand">AMKO<span class="dot">.</span></div>
-        <p style="max-width:280px; font-size:14px;">M/S Amko Engineering Services — residential construction across Karachi for over 20 years.</p>
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow" style="justify-content: center">FAQs</div>
+          <h2>Clear answers, confident decisions</h2>
+          <p>
+            Get clear answers to common questions about pricing, timelines,
+            materials, and supervision.
+          </p>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary>
+              What construction services does AMKO provide?<span
+                class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Grey structure construction, complete/turnkey construction with
+              material, design &amp; planning, and home renovation.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Do you handle complete house construction?<span class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Yes — from grey structure to fully finished, turnkey construction
+              with material, all the way to handover.
+            </p>
+          </details>
+          <details>
+            <summary>
+              How much does house construction cost per square foot?<span
+                class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Grey structure starts around Rs 2,500/sq. ft., and
+              complete/turnkey construction around Rs 4,500/sq. ft. Final
+              pricing depends on design and material specifications — use the
+              estimator above for a range on your plot.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Which areas does AMKO serve?<span class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              DHA, Naya Nazimabad, Bahria Town, Scheme 33, Saadi Town, Saadi
+              Garden and nearby areas across Karachi.
+            </p>
+          </details>
+          <details>
+            <summary>
+              How long does it take to complete a house?<span class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Timelines depend on plot size and scope of work. We agree a
+              realistic schedule with you in writing before construction starts.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Can I use my own architectural design or map?<span
+                class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Yes, you're welcome to bring your own approved map or design. If
+              you don't have one yet, our team can handle design and planning
+              for you.
+            </p>
+          </details>
+          <details>
+            <summary>
+              How do you ensure construction quality?<span class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Every project is personally supervised by our engineering team,
+              with defined material specifications and scope agreed before work
+              begins.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Can I visit your completed projects?<span class="faq-icon"
+                ><svg class="icon"><use href="#ic-arrow" /></svg
+              ></span>
+            </summary>
+            <p>
+              Yes — we're happy to arrange a visit to a completed or ongoing
+              project so you can see the work firsthand before deciding.
+            </p>
+          </details>
+        </div>
       </div>
-      <div class="foot-col">
-        <h4>Services</h4>
-        <div>Fully Finished Construction</div>
-        <div>Grey Structure</div>
-        <div>Design &amp; Planning</div>
-        <div>Renovation</div>
-      </div>
-      <div class="foot-col">
-        <h4>Contact</h4>
-        <a href="tel:+923222538025">+92 322 2538025</a>
-        <a href="mailto:asif.amko@gmail.com">asif.amko@gmail.com</a>
-        <div>Office#02 E 6/3 B, Nazimabad #02, Karachi</div>
-      </div>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <span>© 2026 AMKO Engineering Services.</span>
-    <span>Design by Musaib Asif</span>
-  </div>
-</footer>
+    </section>
 
-<script src="./script.js">
-  </script>
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="section-head on-dark">
+          <div class="eyebrow on-dark">Start Your Project</div>
+          <h2 style="color: var(--cream-100)">Let's build your vision</h2>
+          <p>
+            Tell us about your project, and our team will guide you through the
+            next steps.
+          </p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-form">
+            <div class="field">
+              <label for="cName">Your name</label
+              ><input
+                type="text"
+                id="cName"
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div class="field">
+              <label for="cPhone">Phone number</label
+              ><input type="text" id="cPhone" placeholder="+92 3XX XXXXXXX" />
+            </div>
+            <div class="field">
+              <label for="cArea">Area / location</label
+              ><input
+                type="text"
+                id="cArea"
+                placeholder="e.g. DHA Phase 6, Karachi"
+              />
+            </div>
+            <div class="field">
+              <label for="cType">Project type</label>
+              <select id="cType">
+                <option>Fully Finished Construction</option>
+                <option>Grey Structure</option>
+                <option>Design &amp; Planning</option>
+                <option>Renovation</option>
+              </select>
+            </div>
+            <button class="calc-btn" onclick="sendContactForm()">
+              Request a free quote
+            </button>
+          </div>
+          <div>
+            <div class="direct-card">
+              <div class="ic-box">
+                <svg class="icon"><use href="#ic-phone" /></svg>
+              </div>
+              <div>
+                <div class="lbl">Start a WhatsApp chat</div>
+                <a class="val" href="https://wa.me/923222538025" target="_blank"
+                  >+92 322 2538025</a
+                >
+              </div>
+            </div>
+            <div class="direct-card">
+              <div class="ic-box">
+                <svg class="icon"><use href="#ic-mail" /></svg>
+              </div>
+              <div>
+                <div class="lbl">Send us an email</div>
+                <a class="val" href="mailto:asif.amko@gmail.com"
+                  >asif.amko@gmail.com</a
+                >
+              </div>
+            </div>
+            <div class="map-block ph">
+              <img src="https://picsum.photos/seed/amko-map/700/300" alt="" />
+              <div class="ph-tag">
+                <svg class="icon" style="width: 14px; height: 14px">
+                  <use href="#ic-map" /></svg
+                >Office#02, E 6/3 B Nazimabad #02, Karachi
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</body>
+    <footer>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <div class="foot-brand">AMKO<span class="dot">.</span></div>
+            <p style="max-width: 280px; font-size: 14px">
+              M/S Amko Engineering Services — residential construction across
+              Karachi for over 20 years.
+            </p>
+          </div>
+          <div class="foot-col">
+            <h4>Services</h4>
+            <div>Fully Finished Construction</div>
+            <div>Grey Structure</div>
+            <div>Design &amp; Planning</div>
+            <div>Renovation</div>
+          </div>
+          <div class="foot-col">
+            <h4>Contact</h4>
+            <a href="tel:+923222538025">+92 322 2538025</a>
+            <a href="mailto:asif.amko@gmail.com">asif.amko@gmail.com</a>
+            <div>Office#02 E 6/3 B, Nazimabad #02, Karachi</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 AMKO Engineering Services.</span>
+        <span>Design by Musaib Asif</span>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
 </html>

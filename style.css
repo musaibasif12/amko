@@ -19,7 +19,7 @@
 
   /* -- Color: Gold (accent) -- */
   --gold-300: #f9d76a;
-  --gold-500: #f9b901;
+  --gold-500: #fdcd13;
   --gold-600: #e0a600;
   --gold-tint: rgba(249, 185, 1, 0.12);
 
@@ -60,9 +60,7 @@ html {
 }
 body {
   font-family: var(--f-body);
-  background:
-    radial-gradient(circle at 15% 10%, rgba(249, 185, 1, 0.14), transparent 22%),
-    linear-gradient(180deg, #09090b 0%, #101216 100%);
+  background: transparent;
   color: #edf3f8;
   line-height: 1.6;
   font-size: 16px;
@@ -83,8 +81,8 @@ h1,
 h2,
 h3 {
   font-family: var(--f-display);
-  font-weight: 700;
-  line-height: 1;
+  font-weight: 800;
+  line-height: 1.08;
   letter-spacing: 0.1px;
 }
 a {
@@ -139,6 +137,7 @@ section {
     font-size: clamp(56px, 16vw, 68px);
     line-height: 1.03;
     text-align: center;
+    text-transform: uppercase;
   }
   .hero p {
     font-size: 16px;
@@ -219,7 +218,7 @@ section {
   margin-bottom: var(--sp-4);
 }
 .eyebrow.on-dark {
-  color: var(--gold-300);
+  color: #ffca2a;
 }
 .eyebrow::before {
   content: "";
@@ -263,7 +262,7 @@ section {
   transform: translateY(-2px);
 }
 .btn-gold {
-  background: var(--gold-500);
+  background-color: #ffc815;
   color: var(--ink-900);
   box-shadow: var(--sh-gold);
 }
@@ -343,22 +342,31 @@ section {
 
 /* ================= HEADER ================= */
 header {
-  position: sticky;
+  position: fixed;
+  left: 0;
+  right: 0;
   top: 0;
   z-index: 60;
+  width: 100%;
   background: transparent;
   backdrop-filter: blur(0);
   -webkit-backdrop-filter: blur(0);
   border-bottom: 1px solid transparent;
-  transition: background 0.35s var(--ease), backdrop-filter 0.35s var(--ease), -webkit-backdrop-filter 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease), padding 0.35s var(--ease);
+  transition:
+    background 0.35s var(--ease),
+    backdrop-filter 0.35s var(--ease),
+    -webkit-backdrop-filter 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    padding 0.35s var(--ease);
 }
 header .wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 96px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 28px;
+  padding-bottom: 28px;
 }
 header.is-scrolled {
   background: rgba(15, 15, 17, 0.66);
@@ -398,9 +406,9 @@ nav a:hover {
 /* ================= HERO ================= */
 .hero {
   background:
-    radial-gradient(circle at 20% 15%, rgba(249, 185, 1, 0.045), transparent 24%),
-    radial-gradient(circle at 80% 12%, rgba(249, 185, 1, 0.07), transparent 18%),
-    linear-gradient(180deg, #09090b 0%, #0c1014 100%);
+    radial-gradient(circle at 20% 15%, #030200, transparent 24%),
+    radial-gradient(circle at 80% 12%, #030200, transparent 18%),
+    linear-gradient(180deg, #0c0800 0%, #030200 100%);
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -412,7 +420,12 @@ nav a:hover {
   inset: -12% -10% auto auto;
   width: 52vw;
   height: 52vw;
-  background: radial-gradient(circle, rgba(249, 185, 1, 0.2), rgba(249, 185, 1, 0.05) 18%, transparent 58%);
+  background: radial-gradient(
+    circle,
+    rgba(249, 187, 1, 0.219),
+    rgba(249, 187, 1, 0.081) 18%,
+    transparent 50%
+  );
   filter: blur(28px);
   opacity: 0.7;
   pointer-events: none;
@@ -422,7 +435,12 @@ nav a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(249, 185, 1, 0.02), transparent 28%, rgba(15, 17, 19, 0.15) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(249, 185, 1, 0.02),
+    transparent 28%,
+    rgba(15, 17, 19, 0.15) 100%
+  );
   pointer-events: none;
 }
 .hero .wrap {
@@ -431,16 +449,16 @@ nav a:hover {
   grid-template-columns: 1fr 0.92fr;
   gap: clamp(56px, 5vw, 96px);
   align-items: center;
-  padding-top: 82px;
+  padding-top: 150px;
   padding-bottom: var(--sp-9);
 }
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgb(26, 29, 34,0.2);
-  border: 1px solid rgb(250, 184, 2,0.05);
-  color: var(--gold-300);
+  background-color: rgb(26, 29, 34, 0.2);
+  border: 1px solid rgb(250, 184, 2, 0.05);
+  color: rgb(255, 198, 23, 0.95);
   font-size: 13px;
   font-weight: 600;
   padding: 8px 24px;
@@ -451,14 +469,15 @@ nav a:hover {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--gold-500);
-  box-shadow: 0 0 0 3px rgba(194, 149, 63, 0.25);
+  background: #ffc617;
+  box-shadow: 0 0 0 3px rgb(255, 198, 23, 0.15);
 }
 .hero h1 {
   font-size: clamp(90px, 5.2vw, 64px);
   color: var(--cream-100);
   margin-bottom: var(--sp-5);
   letter-spacing: 0.2px;
+  text-transform: uppercase;
 }
 .hero h1 em {
   font-style: normal;
@@ -495,7 +514,9 @@ nav a:hover {
   inset: 0;
   opacity: 0;
   transform: scale(1.04);
-  transition: opacity 1200ms var(--ease), transform 1400ms var(--ease);
+  transition:
+    opacity 1200ms var(--ease),
+    transform 1400ms var(--ease);
 }
 .hero-slide.is-active {
   opacity: 1;
@@ -575,7 +596,7 @@ nav a:hover {
   min-height: 46px;
   padding: 8px 12px;
   color: var(--cream-100);
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 12px;
   cursor: pointer;
@@ -610,7 +631,9 @@ nav a:hover {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.4px;
-  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease);
 }
 .hero-estimator-link .icon {
   width: 16px;
@@ -677,51 +700,70 @@ nav a:hover {
 }
 
 .stats-bar {
-  background: var(--ink-800);
+  background: rgb(6, 6, 6);
   border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
   position: relative;
 }
 .stats-bar .wrap {
   display: grid;
+  padding: 60px;
   grid-template-columns: repeat(4, 1fr);
+  align-items: center;
 }
 .stat-cell {
-  padding: var(--sp-6) var(--sp-4);
-  text-align: center;
+  padding: 0 8px;
   border-left: 1px solid var(--ink-line);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: flex-start;
+  gap: 22px;
+  min-height: 74px;
 }
 .stat-cell:first-child {
   border-left: none;
 }
 .stat-cell .icon {
   color: var(--gold-500);
-  margin-bottom: 6px;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 auto;
+}
+.num-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 5px;
 }
 .stat-cell .num {
   font-family: var(--f-display);
-  font-size: 32px;
+  font-weight: 600;
+  font-size: 40px;
   color: var(--cream-100);
   letter-spacing: 0.2px;
+  line-height: 1.1;
 }
 .stat-cell .lbl {
   font-size: 12.5px;
   color: var(--ink-muted-2);
   letter-spacing: 0.2px;
+  line-height: 1.35;
 }
 
 /* ================= SERVICES ================= */
+#services {
+  background: #030200;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-5);
 }
 .service-card {
-  background: var(--ink-800);
-  border: 1px solid var(--ink-line);
+  background: #030200;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--r-lg);
   padding: var(--sp-6);
   box-shadow: var(--sh-sm);
@@ -733,7 +775,12 @@ nav a:hover {
 .service-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--sh-md);
-  border-color: var(--gold-300);
+  background: linear-gradient(
+    200deg,
+    rgb(253, 205, 19, 0.03),
+    rgb(253, 205, 19, 0.01)
+  );
+  border-color: rgb(253, 205, 19, 0.5);
 }
 .service-card .ic-box {
   width: 44px;
