@@ -105,7 +105,7 @@
       <div class="wrap">
         <div>
           <div class="hero-badge">
-            <span class="dot-live"></span>200+ Homes Built Across Karachi
+            <span class="dot-live"></span>200+ <span class="white">Homes Built Across Karachi</span>
           </div>
           <h1>Trusted to build<br /><em>Karachi homes.</em></h1>
           <p>
@@ -308,6 +308,129 @@
       </div>
     </section>
 
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Selected Projects</div>
+          <h2>Homes built with purpose</h2>
+          <p>
+            A selection of residential construction completed across Karachi.
+          </p>
+        </div>
+        <div class="project-grid">
+          <div class="project-card" data-project="naya-nazimabad-400">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-1/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad</h3>
+              <div class="project-sub">400 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-project="naya-nazimabad-block-a">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-2/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad, Block A</h3>
+              <div class="project-sub">240 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-project="meerut-society">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-3/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Meerut Society</h3>
+              <div class="project-sub">240 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-project="naya-nazimabad-160">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-4/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad</h3>
+              <div class="project-sub">160 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-project="naya-nazimabad-120">
+            <div class="project-photo ph">
+              <img
+                src="https://picsum.photos/seed/amko-proj-5/600/450"
+                alt=""
+              /><span class="ph-badge">Fully Finished</span>
+            </div>
+            <div class="project-body">
+              <h3>Naya Nazimabad</h3>
+              <div class="project-sub">120 sq. yd. plot</div>
+              <div class="spec-rows">
+                <div class="spec-row">
+                  <span class="k">Floors</span><span class="v">Ground + 1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="k">Type</span
+                  ><span class="v">Complete, with material</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="about" id="about">
       <div class="wrap">
         <div class="about-top">
@@ -398,128 +521,74 @@
       </div>
     </section>
 
-    <section id="projects">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">Selected Projects</div>
-          <h2>Homes built with purpose</h2>
-          <p>
-            A selection of residential construction completed across Karachi.
-          </p>
-        </div>
-        <div class="project-grid">
-          <div class="project-card">
-            <div class="project-photo ph">
-              <img
-                src="https://picsum.photos/seed/amko-proj-1/600/450"
-                alt=""
-              /><span class="ph-badge">Fully Finished</span>
+    <div class="project-modal-backdrop" id="projectModal" aria-hidden="true">
+      <div class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+        <button class="project-modal-close" id="closeProjectModal" aria-label="Close project details">×</button>
+        <div class="project-modal-layout">
+          <div class="project-modal-media">
+            <div class="project-modal-photo">
+              <img id="modalProjectImage" src="https://picsum.photos/seed/amko-proj-1/900/620" alt="" />
             </div>
-            <div class="project-body">
-              <h3>Naya Nazimabad</h3>
-              <div class="project-sub">400 sq. yd. plot</div>
-              <div class="spec-rows">
-                <div class="spec-row">
-                  <span class="k">Floors</span><span class="v">Ground + 1</span>
-                </div>
-                <div class="spec-row">
-                  <span class="k">Type</span
-                  ><span class="v">Complete, with material</span>
-                </div>
+            <div class="project-modal-gallery">
+              <div class="project-modal-thumb project-modal-thumb-active">
+                <img src="https://picsum.photos/seed/amko-proj-1/180/120" alt="" />
+              </div>
+              <div class="project-modal-thumb">
+                <img src="https://picsum.photos/seed/amko-proj-2/180/120" alt="" />
+              </div>
+              <div class="project-modal-thumb">
+                <img src="https://picsum.photos/seed/amko-proj-3/180/120" alt="" />
               </div>
             </div>
           </div>
+          <div class="project-modal-content">
+            <div class="project-modal-kicker">Selected Project</div>
+            <h3 class="project-modal-title" id="modalProjectTitle">Naya Nazimabad — 400 Sq Yd</h3>
+            <div class="project-modal-tag" id="modalProjectTag">G+1 · Fully Finished Construction</div>
 
-          <div class="project-card">
-            <div class="project-photo ph">
-              <img
-                src="https://picsum.photos/seed/amko-proj-2/600/450"
-                alt=""
-              /><span class="ph-badge">Fully Finished</span>
-            </div>
-            <div class="project-body">
-              <h3>Naya Nazimabad, Block A</h3>
-              <div class="project-sub">240 sq. yd. plot</div>
-              <div class="spec-rows">
-                <div class="spec-row">
-                  <span class="k">Floors</span><span class="v">Ground + 1</span>
-                </div>
-                <div class="spec-row">
-                  <span class="k">Type</span
-                  ><span class="v">Complete, with material</span>
-                </div>
+            <div class="project-modal-stats">
+              <div class="project-stat">
+                <span class="project-stat-icon">📍</span>
+                <span class="project-stat-value" id="modalProjectLocation">Naya Nazimabad</span>
+                <span class="project-stat-label">Location</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-icon">📐</span>
+                <span class="project-stat-value" id="modalProjectSize">400 sq yd</span>
+                <span class="project-stat-label">Plot size</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-icon">🏗️</span>
+                <span class="project-stat-value" id="modalProjectStructure">G+1</span>
+                <span class="project-stat-label">Structure</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-icon">⏱️</span>
+                <span class="project-stat-value" id="modalProjectDuration">8 months</span>
+                <span class="project-stat-label">Duration</span>
               </div>
             </div>
-          </div>
 
-          <div class="project-card">
-            <div class="project-photo ph">
-              <img
-                src="https://picsum.photos/seed/amko-proj-3/600/450"
-                alt=""
-              /><span class="ph-badge">Fully Finished</span>
-            </div>
-            <div class="project-body">
-              <h3>Meerut Society</h3>
-              <div class="project-sub">240 sq. yd. plot</div>
-              <div class="spec-rows">
-                <div class="spec-row">
-                  <span class="k">Floors</span><span class="v">Ground + 1</span>
-                </div>
-                <div class="spec-row">
-                  <span class="k">Type</span
-                  ><span class="v">Complete, with material</span>
-                </div>
-              </div>
-            </div>
-          </div>
+            <p class="project-modal-story" id="modalProjectStory">
+              A 400 sq yd residential build in Naya Nazimabad, delivered as a fully finished turnkey project. AMKO handled everything from grey structure to final finishing, including flooring, electrical, plumbing and interior completion.
+            </p>
 
-          <div class="project-card">
-            <div class="project-photo ph">
-              <img
-                src="https://picsum.photos/seed/amko-proj-4/600/450"
-                alt=""
-              /><span class="ph-badge">Fully Finished</span>
+            <div class="project-modal-included">
+              <div class="project-modal-included-title">What was included</div>
+              <ul class="project-modal-list" id="modalProjectIncludes">
+                <li>Structural work</li>
+                <li>Electrical &amp; plumbing</li>
+                <li>Flooring &amp; tiling</li>
+                <li>Paint &amp; finishing</li>
+                <li>Kitchen &amp; bathroom completion</li>
+              </ul>
             </div>
-            <div class="project-body">
-              <h3>Naya Nazimabad</h3>
-              <div class="project-sub">160 sq. yd. plot</div>
-              <div class="spec-rows">
-                <div class="spec-row">
-                  <span class="k">Floors</span><span class="v">Ground + 1</span>
-                </div>
-                <div class="spec-row">
-                  <span class="k">Type</span
-                  ><span class="v">Complete, with material</span>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="project-card">
-            <div class="project-photo ph">
-              <img
-                src="https://picsum.photos/seed/amko-proj-5/600/450"
-                alt=""
-              /><span class="ph-badge">Fully Finished</span>
-            </div>
-            <div class="project-body">
-              <h3>Naya Nazimabad</h3>
-              <div class="project-sub">120 sq. yd. plot</div>
-              <div class="spec-rows">
-                <div class="spec-row">
-                  <span class="k">Floors</span><span class="v">Ground + 1</span>
-                </div>
-                <div class="spec-row">
-                  <span class="k">Type</span
-                  ><span class="v">Complete, with material</span>
-                </div>
-              </div>
-            </div>
+            <a class="btn btn-gold project-modal-cta" id="projectModalCta" href="#estimator">Want a project like this? Get a free estimate</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <section class="why">
       <div class="wrap">
