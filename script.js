@@ -76,7 +76,12 @@ const projectDetails = {
     duration: '8 months',
     story: 'A 400 sq yd residential build in Naya Nazimabad, delivered as a fully finished turnkey project. AMKO handled everything from grey structure to final finishing, including flooring, electrical, plumbing and interior completion.',
     includes: ['Structural work','Electrical & plumbing','Flooring & tiling','Paint & finishing','Kitchen & bathroom completion'],
-    image: 'https://picsum.photos/seed/amko-proj-1/900/620'
+    images: [
+      'https://picsum.photos/seed/amko-proj-1/900/620',
+      'https://picsum.photos/seed/amko-proj-2/900/620',
+      'https://picsum.photos/seed/amko-proj-3/900/620',
+      'https://picsum.photos/seed/amko-proj-4/900/620'
+    ]
   },
   'naya-nazimabad-block-a': {
     title: 'Naya Nazimabad, Block A — 240 Sq Yd',
@@ -87,7 +92,12 @@ const projectDetails = {
     duration: '7 months',
     story: 'A compact family residence in Naya Nazimabad, Block A built with a practical layout and complete finishing scope. The project included grey structure works, electrical rough-in, plumbing and final internal fit-out.',
     includes: ['Structural work','Electrical rough-in','Plumbing network','Tiling & flooring','Paint & finishing'],
-    image: 'https://picsum.photos/seed/amko-proj-2/900/620'
+    images: [
+      'https://picsum.photos/seed/amko-proj-2/900/620',
+      'https://picsum.photos/seed/amko-proj-3/900/620',
+      'https://picsum.photos/seed/amko-proj-4/900/620',
+      'https://picsum.photos/seed/amko-proj-1/900/620'
+    ]
   },
   'meerut-society': {
     title: 'Meerut Society — 240 Sq Yd',
@@ -98,7 +108,12 @@ const projectDetails = {
     duration: '7 months',
     story: 'A complete residential project in Meerut Society developed with durable materials and coordinated finishing. AMKO supervised the structure, services and final home-ready finishes for a more predictable delivery process.',
     includes: ['Structural work','Brickwork & plaster','Electrical & plumbing','Flooring & finishing','Internal fixtures'],
-    image: 'https://picsum.photos/seed/amko-proj-3/900/620'
+    images: [
+      'https://picsum.photos/seed/amko-proj-3/900/620',
+      'https://picsum.photos/seed/amko-proj-4/900/620',
+      'https://picsum.photos/seed/amko-proj-5/900/620',
+      'https://picsum.photos/seed/amko-proj-2/900/620'
+    ]
   },
   'naya-nazimabad-160': {
     title: 'Naya Nazimabad — 160 Sq Yd',
@@ -109,7 +124,12 @@ const projectDetails = {
     duration: '6 months',
     story: 'A compact 160 sq yd home in Naya Nazimabad planned around space efficiency and finish quality. The build focused on practical room planning, high-use areas and a clean handover timeline.',
     includes: ['Structural work','Kitchen planning','Electrical & plumbing','Flooring & wall finish','Paint & final handover'],
-    image: 'https://picsum.photos/seed/amko-proj-4/900/620'
+    images: [
+      'https://picsum.photos/seed/amko-proj-4/900/620',
+      'https://picsum.photos/seed/amko-proj-1/900/620',
+      'https://picsum.photos/seed/amko-proj-2/900/620',
+      'https://picsum.photos/seed/amko-proj-3/900/620'
+    ]
   },
   'naya-nazimabad-120': {
     title: 'Naya Nazimabad — 120 Sq Yd',
@@ -120,9 +140,58 @@ const projectDetails = {
     duration: '6 months',
     story: 'A practical 120 sq yd residential construction focused on efficient planning and durable finishing. The delivery included the structure, service lines and final surfaces ready for the homeowner’s move-in process.',
     includes: ['Structural work','Electrical & plumbing','Flooring & tiling','Paint & finishing','Entry & exterior touch-up'],
-    image: 'https://picsum.photos/seed/amko-proj-5/900/620'
+    images: [
+      'https://picsum.photos/seed/amko-proj-5/900/620',
+      'https://picsum.photos/seed/amko-proj-1/900/620',
+      'https://picsum.photos/seed/amko-proj-2/900/620',
+      'https://picsum.photos/seed/amko-proj-4/900/620'
+    ]
   }
 };
+
+function buildModalGallery(images) {
+  const gallery = document.getElementById('modalProjectGallery');
+  const dots = document.getElementById('modalProjectDots');
+
+  if (!gallery || !dots) return [];
+
+  gallery.innerHTML = images
+    .map((image, index) => `
+      <div class="project-modal-thumb${index === 0 ? ' project-modal-thumb-active' : ''}" data-slide="${index}">
+        <img src="${image}" alt="" />
+      </div>
+    `)
+    .join('');
+
+  dots.innerHTML = images
+    .map((_, index) => `<button class="project-modal-dot${index === 0 ? ' is-active' : ''}" type="button" data-slide="${index}" aria-label="Show project image ${index + 1}"></button>`)
+    .join('');
+
+  return images;
+}
+
+function showProjectImage(imageIndex, images) {
+  const modalImage = document.getElementById('modalProjectImage');
+  const gallery = document.getElementById('modalProjectGallery');
+  const dots = document.getElementById('modalProjectDots');
+  if (!modalImage || !gallery || !dots || !images.length) return;
+
+  const cleanIndex = (imageIndex + images.length) % images.length;
+  modalImage.style.opacity = '0';
+
+  setTimeout(() => {
+    modalImage.src = images[cleanIndex];
+    modalImage.style.opacity = '1';
+  }, 500);
+
+  Array.from(gallery.children).forEach((thumb, i) => {
+    thumb.classList.toggle('project-modal-thumb-active', i === cleanIndex);
+  });
+
+  Array.from(dots.children).forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === cleanIndex);
+  });
+}
 
 function openProjectModal(projectCard) {
   if (!projectModal) return;
@@ -131,7 +200,6 @@ function openProjectModal(projectCard) {
   const cardData = projectDetails[projectKey] || projectDetails['naya-nazimabad-400'];
 
   const modalTitle = document.getElementById('modalProjectTitle');
-  const modalTag = document.getElementById('modalProjectTag');
   const modalLocation = document.getElementById('modalProjectLocation');
   const modalSize = document.getElementById('modalProjectSize');
   const modalStructure = document.getElementById('modalProjectStructure');
@@ -141,16 +209,56 @@ function openProjectModal(projectCard) {
   const modalImage = document.getElementById('modalProjectImage');
 
   if (modalTitle) modalTitle.textContent = cardData.title;
-  if (modalTag) modalTag.textContent = cardData.tag;
   if (modalLocation) modalLocation.textContent = cardData.location;
   if (modalSize) modalSize.textContent = cardData.size;
   if (modalStructure) modalStructure.textContent = cardData.structure;
   if (modalDuration) modalDuration.textContent = cardData.duration;
   if (modalStory) modalStory.textContent = cardData.story;
-  if (modalImage) modalImage.src = cardData.image;
+  if (modalImage) modalImage.src = cardData.images[0];
 
   if (modalIncludes) {
     modalIncludes.innerHTML = cardData.includes.map((item) => `<li>${item}</li>`).join('');
+  }
+
+  let images = buildModalGallery(cardData.images || []);
+  let imageIndex = 0;
+  const dots = document.getElementById('modalProjectDots');
+  const gallery = document.getElementById('modalProjectGallery');
+
+  if (dots) {
+    dots.querySelectorAll('button').forEach((dot) => {
+      dot.addEventListener('click', () => {
+        imageIndex = Number(dot.dataset.slide);
+        showProjectImage(imageIndex, images);
+      });
+    });
+  }
+
+  if (gallery) {
+    gallery.querySelectorAll('.project-modal-thumb').forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        imageIndex = Number(thumb.dataset.slide);
+        showProjectImage(imageIndex, images);
+      });
+    });
+  }
+
+  clearInterval(window.projectCarouselTimer);
+  window.projectCarouselTimer = setInterval(() => {
+    imageIndex = (imageIndex + 1) % images.length;
+    showProjectImage(imageIndex, images);
+  }, 4500);
+
+  const modalMedia = document.querySelector('.project-modal-media');
+  if (modalMedia) {
+    modalMedia.onmouseenter = () => clearInterval(window.projectCarouselTimer);
+    modalMedia.onmouseleave = () => {
+      clearInterval(window.projectCarouselTimer);
+      window.projectCarouselTimer = setInterval(() => {
+        imageIndex = (imageIndex + 1) % images.length;
+        showProjectImage(imageIndex, images);
+      }, 4500);
+    };
   }
 
   projectModal.classList.add('is-open');
@@ -161,6 +269,7 @@ function openProjectModal(projectCard) {
 function closeProjectModal() {
   if (!projectModal) return;
 
+  clearInterval(window.projectCarouselTimer);
   projectModal.classList.remove('is-open');
   projectModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
