@@ -155,19 +155,45 @@ function buildModalGallery(images) {
 
   if (!gallery || !dots) return [];
 
-  gallery.innerHTML = images
-    .map((image, index) => `
-      <div class="project-modal-thumb${index === 0 ? ' project-modal-thumb-active' : ''}" data-slide="${index}">
-        <img src="${image}" alt="" />
-      </div>
-    `)
-    .join('');
+  renderModalGallery(images, 0, gallery);
 
   dots.innerHTML = images
     .map((_, index) => `<button class="project-modal-dot${index === 0 ? ' is-active' : ''}" type="button" data-slide="${index}" aria-label="Show project image ${index + 1}"></button>`)
     .join('');
 
+  if (gallery) {
+    gallery.onclick = (event) => {
+      const thumb = event.target.closest('.project-modal-thumb');
+      if (!thumb) return;
+
+      const selectedIndex = Number(thumb.dataset.slide);
+      if (!Number.isNaN(selectedIndex)) {
+        showProjectImage(selectedIndex, images);
+      }
+    };
+  }
+
   return images;
+}
+
+function renderModalGallery(images, activeIndex, gallery) {
+  if (!gallery || !images.length) return;
+
+  const visibleImages = [];
+  const imageCount = images.length;
+
+  for (let offset = 0; offset < Math.min(3, imageCount); offset += 1) {
+    const imageIndex = (activeIndex + offset) % imageCount;
+    visibleImages.push({ image: images[imageIndex], index: imageIndex });
+  }
+
+  gallery.innerHTML = visibleImages
+    .map((item, i) => `
+      <div class="project-modal-thumb${item.index === activeIndex ? ' project-modal-thumb-active' : ''}${i > 0 ? ' project-modal-thumb-slide' : ''}" data-slide="${item.index}">
+        <img src="${item.image}" alt="" />
+      </div>
+    `)
+    .join('');
 }
 
 function showProjectImage(imageIndex, images) {
@@ -177,20 +203,35 @@ function showProjectImage(imageIndex, images) {
   if (!modalImage || !gallery || !dots || !images.length) return;
 
   const cleanIndex = (imageIndex + images.length) % images.length;
-  modalImage.style.opacity = '0';
+  modalImage.classList.add('project-modal-photo-fading');
 
   setTimeout(() => {
     modalImage.src = images[cleanIndex];
-    modalImage.style.opacity = '1';
-  }, 500);
+    modalImage.classList.remove('project-modal-photo-fading');
+  }, 280);
 
-  Array.from(gallery.children).forEach((thumb, i) => {
-    thumb.classList.toggle('project-modal-thumb-active', i === cleanIndex);
-  });
+  renderModalGallery(images, cleanIndex, gallery);
 
   Array.from(dots.children).forEach((dot, i) => {
     dot.classList.toggle('is-active', i === cleanIndex);
   });
+
+  const thumbs = Array.from(gallery.children);
+  thumbs.forEach((thumb) => {
+    thumb.classList.toggle('project-modal-thumb-active', Number(thumb.dataset.slide) === cleanIndex);
+  });
+
+  if (gallery) {
+    gallery.onclick = (event) => {
+      const thumb = event.target.closest('.project-modal-thumb');
+      if (!thumb) return;
+
+      const selectedIndex = Number(thumb.dataset.slide);
+      if (!Number.isNaN(selectedIndex)) {
+        showProjectImage(selectedIndex, images);
+      }
+    };
+  }
 }
 
 function openProjectModal(projectCard) {
@@ -223,7 +264,6 @@ function openProjectModal(projectCard) {
   let images = buildModalGallery(cardData.images || []);
   let imageIndex = 0;
   const dots = document.getElementById('modalProjectDots');
-  const gallery = document.getElementById('modalProjectGallery');
 
   if (dots) {
     dots.querySelectorAll('button').forEach((dot) => {
@@ -234,21 +274,6 @@ function openProjectModal(projectCard) {
     });
   }
 
-  if (gallery) {
-    gallery.querySelectorAll('.project-modal-thumb').forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        imageIndex = Number(thumb.dataset.slide);
-        showProjectImage(imageIndex, images);
-      });
-    });
-  }
-
-  clearInterval(window.projectCarouselTimer);
-  window.projectCarouselTimer = setInterval(() => {
-    imageIndex = (imageIndex + 1) % images.length;
-    showProjectImage(imageIndex, images);
-  }, 4500);
-
   const modalMedia = document.querySelector('.project-modal-media');
   if (modalMedia) {
     modalMedia.onmouseenter = () => clearInterval(window.projectCarouselTimer);
@@ -257,9 +282,15 @@ function openProjectModal(projectCard) {
       window.projectCarouselTimer = setInterval(() => {
         imageIndex = (imageIndex + 1) % images.length;
         showProjectImage(imageIndex, images);
-      }, 4500);
+      }, 3500);
     };
   }
+
+  clearInterval(window.projectCarouselTimer);
+  window.projectCarouselTimer = setInterval(() => {
+    imageIndex = (imageIndex + 1) % images.length;
+    showProjectImage(imageIndex, images);
+  }, 3500);
 
   projectModal.classList.add('is-open');
   projectModal.setAttribute('aria-hidden', 'false');
@@ -329,13 +360,23 @@ heroTypeButtons.forEach((btn) => {
 
 window.addEventListener('scroll', () => {
   if (!header) return;
-  header.classList.toggle('is-scrolled', window.scrollY > 24);
 
-  if (window.scrollY < lastScrollY) {
+  const currentScrollY = window.scrollY;
+  const scrollingDown = currentScrollY > lastScrollY;
+
+  if (currentScrollY <= 24) {
+    header.classList.remove('is-hidden');
+    header.classList.remove('is-light');
+  } else if (scrollingDown) {
+    header.classList.add('is-hidden');
+    header.classList.remove('is-light');
+  } else {
+    header.classList.remove('is-hidden');
+    header.classList.add('is-light');
     closeServiceCards();
   }
 
-  lastScrollY = window.scrollY;
+  lastScrollY = currentScrollY;
 });
 
 const slideHold = 2000;

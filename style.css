@@ -357,13 +357,19 @@ header {
   backdrop-filter: blur(0);
   -webkit-backdrop-filter: blur(0);
   border-bottom: 1px solid transparent;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
   transition:
     background 0.35s var(--ease),
     backdrop-filter 0.35s var(--ease),
     -webkit-backdrop-filter 0.35s var(--ease),
     border-color 0.35s var(--ease),
     box-shadow 0.35s var(--ease),
-    padding 0.35s var(--ease);
+    padding 0.35s var(--ease),
+    opacity 0.28s var(--ease),
+    visibility 0.28s var(--ease),
+    transform 0.28s var(--ease);
 }
 header .wrap {
   display: flex;
@@ -373,11 +379,17 @@ header .wrap {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-header.is-scrolled {
-  background: rgba(0, 0, 0, 0.66);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  /* border-bottom-color: rgba(249, 185, 1, 0.2); */
+header.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-110%);
+}
+header.is-light {
+  background: rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  /* border-bottom-color: rgba(253, 253, 253, 0.2); */
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 .logo {
@@ -1106,8 +1118,14 @@ nav a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 500ms var(--ease);
+  opacity: 1;
+  transition: opacity 420ms var(--ease), transform 640ms var(--ease);
 } 
+
+.project-modal-photo img.project-modal-photo-fading {
+  opacity: 0;
+  transform: scale(1.035);
+}
 
 .project-modal-photo {
   position: relative;
@@ -1124,9 +1142,11 @@ nav a:hover {
 
 .project-modal-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--sp-3);
   margin-top: var(--sp-3);
+  min-height: 120px;
+  overflow: hidden;
 }
 
 .project-modal-thumb {
@@ -1134,8 +1154,14 @@ nav a:hover {
   border-radius: var(--r-sm);
   overflow: hidden;
   border: 1px solid var(--ink-line);
-  opacity: 0.88;
+  opacity: 0.86;
   cursor: pointer;
+  transform: translateX(0);
+  transition:
+    border-color 340ms var(--ease),
+    opacity 340ms var(--ease),
+    transform 380ms var(--ease),
+    filter 380ms var(--ease);
 }
 
 .project-modal-thumb-active {
@@ -1143,10 +1169,32 @@ nav a:hover {
   opacity: 1;
 }
 
+.project-modal-thumb-slide {
+  animation: previewSlideIn 380ms var(--ease);
+}
+
 .project-modal-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 380ms var(--ease), opacity 340ms var(--ease);
+}
+
+.project-modal-thumb:hover img {
+  transform: scale(1.035);
+}
+
+@keyframes previewSlideIn {
+  from {
+    opacity: 0.54;
+    transform: translateX(20px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
 }
 
 .project-modal-dots {
@@ -1335,24 +1383,63 @@ nav a:hover {
   box-shadow: var(--sh-sm);
   transition:
     box-shadow 0.2s var(--ease),
-    transform 0.2s var(--ease);
+    transform 0.2s var(--ease),
+    border-color 0.3s var(--ease);
 }
+
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--sh-md);
+  border:1px solid rgb(246, 202, 27, 0.2);
 }
+
 .project-photo {
+  position: relative;
   aspect-ratio: 4/3;
+  overflow: hidden;
 }
+
+.project-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 202, 27, 0.04);
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 640ms var(--ease), transform 760ms var(--ease), background 640ms var(--ease);
+}
+
+.project-card:hover .project-photo::after {
+  opacity: 1;
+  transform: scale(1);
+  background: rgba(246, 202, 27, 0.08);
+}
+
+.project-card:hover .project-photo img {
+  transform: scale(1.035);
+  transition: transform 780ms var(--ease);
+}
+
+.project-card:hover .project-body h3,
+.project-card:hover{
+  color: #f6ca1b;
+}
+
+.project-card:hover .spec-row .v {
+  color: var(--cream-100);
+}
+
 .project-body {
   padding: var(--sp-5);
 }
+
 .project-body h3 {
   font-family: var(--f-body);
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 2px;
   color: var(--cream-100);
+  transition: color 300ms var(--ease);
 }
 .project-sub {
   color: var(--ink-muted);
