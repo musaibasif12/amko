@@ -8,6 +8,7 @@ const projectCards = Array.from(document.querySelectorAll('#projects .project-ca
 const projectModal = document.getElementById('projectModal');
 const closeProjectModalBtn = document.getElementById('closeProjectModal');
 const projectModalCta = document.getElementById('projectModalCta');
+const processItems = Array.from(document.querySelectorAll('.process-item'));
 
 let heroIndex = 0;
 let selectedRate = 2500;
@@ -65,6 +66,23 @@ heroDots.forEach((dot) => {
     showHeroSlide(Number(dot.dataset.slide));
   });
 });
+
+if (processItems.length) {
+  const processObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, {
+    threshold: 0.25,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  processItems.forEach((item) => {
+    processObserver.observe(item);
+  });
+}
 
 const projectDetails = {
   'naya-nazimabad-400': {
