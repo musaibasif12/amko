@@ -95,7 +95,12 @@ h1 {
   font-size: clamp(52px, 5vw, 82px);
 }
 h2 {
-  font-size: clamp(42px, 4vw, 60px);
+  margin: 0;
+  font-size: clamp(52px, 4vw, 76px);
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--cream-100);
 }
 h3 {
   font-size: clamp(28px, 2.2vw, 36px);
@@ -336,7 +341,7 @@ section > * {
   }
 }
 
-@media (max-width: 760px){
+@media (max-width: 760px) {
   header .wrap {
     min-height: 76px;
     padding-top: 12px;
@@ -361,7 +366,6 @@ section > * {
     font-size: 12px;
   }
 
-
   nav a {
     font-size: 12px;
   }
@@ -377,17 +381,14 @@ section > * {
     align-items: stretch;
   }
 
-
   .hero .wrap > div:first-child {
     text-align: left;
   }
-
 
   .hero-badge {
     justify-content: flex-start;
     margin-inline: 0;
   }
-
 
   .hero h1 {
     font-size: clamp(56px, 16vw, 68px);
@@ -396,14 +397,12 @@ section > * {
     text-transform: uppercase;
   }
 
-
   .hero p {
     font-size: 16px;
     max-width: none;
     text-align: left;
     margin-inline: 0;
   }
-
 
   .hero-actions {
     flex-direction: row;
@@ -417,16 +416,13 @@ section > * {
     justify-content: center;
   }
 
-
   .hero-visual {
     margin-top: var(--sp-1);
   }
 
-
   .hero-slideshow {
     aspect-ratio: 1 / 1.05;
   }
-
 
   .hero-slide-copy {
     left: 14px;
@@ -434,18 +430,15 @@ section > * {
     bottom: 14px;
   }
 
-
   .hero-estimator-card {
     left: 14px !important;
     right: 14px !important;
     top: 14px !important;
   }
 
-
   .hero-estimator-toggle {
     grid-template-columns: 1fr;
   }
-
 
   .hero-estimator-link {
     width: 100%;
@@ -474,7 +467,6 @@ section > * {
     grid-template-columns: 1fr;
   }
 
-
   .stats-bar .wrap {
     grid-template-columns: 1fr 1fr;
     padding: 24px 16px;
@@ -500,7 +492,6 @@ section > * {
   section {
     padding: var(--sp-8) 0;
   }
-
 
   .wrap {
     padding: 0 22px;
@@ -710,10 +701,7 @@ section > * {
   text-align: center;
 }
 .section-head h2 {
-  font-size: clamp(48px, 4.2vw, 58px);
   margin-bottom: var(--sp-4);
-  font-weight: 700;
-  line-height: 1.15;
 }
 .section-head p {
   color: var(--slate-600);
@@ -739,7 +727,9 @@ section > * {
   border: 1px solid var(--ink-line);
   border-radius: var(--r-lg);
   padding: var(--sp-6);
-  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+  transition:
+    border-color 0.2s var(--ease),
+    transform 0.2s var(--ease);
 }
 
 .proof-card:hover {
@@ -952,24 +942,14 @@ section > * {
 }
 
 .mini-media {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 10px;
+  display: block;
+  width: 100%;
+  height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  background: linear-gradient(180deg, rgba(249, 185, 1, 0.18), rgba(15, 17, 19, 0.9));
-  color: var(--cream-100);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  min-height: 90px;
+  min-height: 0;
+  object-fit: cover;
 }
-
-.mini-media-a { background: linear-gradient(160deg, rgba(249, 185, 1, 0.2), rgba(15, 17, 19, 0.82)); }
-.mini-media-b { background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(15, 17, 19, 0.82)); }
-.mini-media-c { background: linear-gradient(160deg, rgba(249, 185, 1, 0.14), rgba(15, 17, 19, 0.82)); }
 
 .process {
   background: var(--section-bg);
@@ -1031,7 +1011,9 @@ section > * {
   gap: 18px;
   min-height: 290px;
   opacity: 0;
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .process-item.is-left {
@@ -1768,7 +1750,6 @@ nav a:hover {
   gap: var(--sp-5);
 }
 
-
 .service-card {
   background: rgba(14, 14, 12, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.04);
@@ -1784,29 +1765,25 @@ nav a:hover {
     transform 0.35s var(--ease),
     border-color 0.35s var(--ease),
     box-shadow 0.35s var(--ease);
-    transform : 0.35s var(--ease),
+  transform:
+    0.35s var(--ease),
     border-color 0.35s var(--ease),
     box-shadow 0.35s var(--ease);
 }
 
 .service-card:hover,
 .service-card:focus-visible {
-
-.service-card:hover,
-.service-card:focus-visible {
   transform: translateY(-4px);
-  border-color: rgba(253, 205, 19, 0.16);
+  border-color: rgba(240, 239, 234, 0.16);
   box-shadow: 0 18px 36px -28px rgba(253, 205, 19, 0.2);
   border-color: rgba(253, 205, 19, 0.16);
   box-shadow: 0 18px 36px -28px rgba(253, 205, 19, 0.2);
 }
-
 
 .service-card:focus-visible {
   outline: 2px solid var(--gold-500);
   outline-offset: 4px;
 }
-
 
 .service-photo {
   position: relative;
@@ -1820,21 +1797,24 @@ nav a:hover {
   background: #0d0d0d;
 }
 
-
 .service-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+  transition:
+    transform 0.6s var(--ease),
+    filter 0.6s var(--ease);
   filter: saturate(0.92) contrast(1.04);
 }
 
+/* .service-card:hover,
+.service-card:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
   filter: saturate(0.92) contrast(1.04);
-}
+} */
 
 .service-card:hover .service-photo img,
 .service-card:focus-visible .service-photo img {
@@ -1952,7 +1932,6 @@ nav a:hover {
   line-height: 0.95;
 }
 
-
 .service-card p {
   color: var(--ink-muted);
   font-size: 15px;
@@ -1999,7 +1978,7 @@ nav a:hover {
 
 .service-card:hover {
   transform: none;
-  border-color: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 226, 7, 0.09);
   box-shadow: none;
 }
 
@@ -2184,8 +2163,8 @@ nav a:hover {
 
 /* ================= PROJECTS ================= */
 #projects {
-  background:var(--section-bg);
-  background:var(--section-bg);
+  background: var(--section-bg);
+  background: var(--section-bg);
 }
 
 .project-grid {
@@ -2231,7 +2210,7 @@ nav a:hover {
   overflow: auto;
   background: #1a1a1a;
   border-radius: var(--r-lg);
-  border: 1px solid rgb(198, 198, 196,0.05);
+  border: 1px solid rgb(198, 198, 196, 0.05);
   position: relative;
   padding: var(--sp-5);
   color: var(--cream-100);
@@ -2311,8 +2290,10 @@ nav a:hover {
   height: 100%;
   object-fit: cover;
   opacity: 1;
-  transition: opacity 420ms var(--ease), transform 640ms var(--ease);
-} 
+  transition:
+    opacity 420ms var(--ease),
+    transform 640ms var(--ease);
+}
 
 .project-modal-photo img.project-modal-photo-fading {
   opacity: 0;
@@ -2330,7 +2311,7 @@ nav a:hover {
   inset: 0;
   background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
   pointer-events: none;
-} 
+}
 
 .project-modal-gallery {
   display: grid;
@@ -2369,7 +2350,9 @@ nav a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 380ms var(--ease), opacity 340ms var(--ease);
+  transition:
+    transform 380ms var(--ease),
+    opacity 340ms var(--ease);
 }
 
 .project-modal-thumb:hover img {
@@ -2404,7 +2387,10 @@ nav a:hover {
   background: rgba(247, 247, 245, 0.35);
   border: 1px solid rgba(247, 247, 245, 0.5);
   cursor: pointer;
-  transition: background 260ms var(--ease), border-color 260ms var(--ease), transform 260ms var(--ease);
+  transition:
+    background 260ms var(--ease),
+    border-color 260ms var(--ease),
+    transform 260ms var(--ease);
 }
 
 .project-modal-dot.is-active {
@@ -2468,9 +2454,21 @@ nav a:hover {
 
 .project-stat-icon {
   color: var(--gold-500);
-  font-size: 22px;
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(253, 205, 19, 0.08);
+  border: 1px solid rgba(253, 205, 19, 0.14);
   margin-bottom: var(--sp-2);
+}
+
+.project-stat-icon .icon {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.8;
 }
 
 .project-stat-value {
@@ -2568,7 +2566,11 @@ nav a:hover {
 }
 
 .project-card {
-  background: var(--ink-800);
+  background: linear-gradient(
+    180deg,
+    rgba(22, 19, 12, 0.82),
+    rgba(12, 12, 10, 0.96)
+  );
   border: 1px solid var(--ink-line);
   border-radius: var(--r-lg);
   overflow: hidden;
@@ -2582,7 +2584,7 @@ nav a:hover {
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--sh-md);
-  border:1px solid rgb(246, 202, 27, 0.2);
+  border: 1px solid rgb(246, 202, 27, 0.2);
 }
 
 .project-photo {
@@ -2598,7 +2600,10 @@ nav a:hover {
   background: rgba(246, 202, 27, 0.04);
   opacity: 0;
   transform: scale(1.02);
-  transition: opacity 640ms var(--ease), transform 760ms var(--ease), background 640ms var(--ease);
+  transition:
+    opacity 640ms var(--ease),
+    transform 760ms var(--ease),
+    background 640ms var(--ease);
 }
 
 .project-card:hover .project-photo::after {
@@ -2613,7 +2618,7 @@ nav a:hover {
 }
 
 .project-card:hover .project-body h3,
-.project-card:hover{
+.project-card:hover {
   color: #f6ca1b;
 }
 
@@ -2672,7 +2677,11 @@ nav a:hover {
 
 .why-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(22, 19, 12, 0.82), rgba(12, 12, 10, 0.96));
+  background: linear-gradient(
+    180deg,
+    rgba(22, 19, 12, 0.82),
+    rgba(12, 12, 10, 0.96)
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
   padding: var(--sp-6);
@@ -2689,7 +2698,11 @@ nav a:hover {
   inset: 0 auto auto 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(253, 205, 19, 0.9), rgba(253, 205, 19, 0));
+  background: linear-gradient(
+    90deg,
+    rgba(253, 205, 19, 0.9),
+    rgba(253, 205, 19, 0)
+  );
   opacity: 0.8;
 }
 
@@ -2774,11 +2787,19 @@ nav a:hover {
 }
 
 .why-card-soft {
-  background: linear-gradient(180deg, rgba(22, 19, 12, 0.82), rgba(12, 12, 10, 0.96));
+  background: linear-gradient(
+    180deg,
+    rgba(22, 19, 12, 0.82),
+    rgba(12, 12, 10, 0.96)
+  );
 }
 
 .why-card-contrast {
-  background: linear-gradient(180deg, rgba(22, 19, 12, 0.82), rgba(12, 12, 10, 0.96));
+  background: linear-gradient(
+    180deg,
+    rgba(22, 19, 12, 0.82),
+    rgba(12, 12, 10, 0.96)
+  );
 }
 
 /* ================= CTA BANNER ================= */
@@ -2802,8 +2823,6 @@ nav a:hover {
   padding: 0 24px;
 }
 .cta-content h2 {
-  font-size: clamp(28px, 3.8vw, 42px);
-  color: #fff;
   margin-bottom: var(--sp-3);
 }
 .cta-content p {
@@ -2815,8 +2834,8 @@ nav a:hover {
 
 /* ================= ESTIMATOR ================= */
 .estimator {
-  background:var(--section-bg);
-  background:var(--section-bg);
+  background: var(--section-bg);
+  background: var(--section-bg);
 }
 .estimator-box {
   background: var(--ink-800);
@@ -3075,7 +3094,7 @@ nav a:hover {
 }
 
 .test-card:hover {
-  border-color: rgba(253, 205, 19, 0.20);
+  border-color: rgba(253, 205, 19, 0.2);
   box-shadow: 0 0 10px rgba(253, 205, 19, 0.08);
   transform: translateY(-4px);
 }
@@ -3132,13 +3151,21 @@ nav a:hover {
 }
 
 @keyframes marquee-right {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes marquee-left {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* ================= FAQ ================= */

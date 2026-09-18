@@ -67,6 +67,60 @@ heroDots.forEach((dot) => {
   });
 });
 
+function animateStatNumber(element) {
+  if (!element || element.dataset.animated === 'true') return;
+
+  const targetText = element.dataset.target || '0';
+  const match = targetText.match(/\d+(?:\.\d+)?/);
+  if (!match) return;
+
+  const targetValue = Number.parseFloat(match[0]);
+  const prefix = targetText.slice(0, targetText.indexOf(match[0]));
+  const suffix = targetText.slice(targetText.indexOf(match[0]) + match[0].length);
+  const duration = 1200;
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const currentValue = targetValue * eased;
+    const displayValue = Number.isInteger(targetValue)
+      ? Math.round(currentValue)
+      : currentValue.toFixed(1);
+
+    element.textContent = `${prefix}${displayValue}${suffix}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+      return;
+    }
+
+    element.textContent = targetText;
+    element.dataset.animated = 'true';
+  }
+
+  requestAnimationFrame(update);
+}
+
+const statNumbers = document.querySelectorAll('.stat-cell .num');
+if (statNumbers.length) {
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateStatNumber(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.35
+  });
+
+  statNumbers.forEach((number) => {
+    number.textContent = '0';
+    statObserver.observe(number);
+  });
+}
+
 if (processItems.length) {
   const processObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -163,6 +217,22 @@ const projectDetails = {
       'https://picsum.photos/seed/amko-proj-1/900/620',
       'https://picsum.photos/seed/amko-proj-2/900/620',
       'https://picsum.photos/seed/amko-proj-4/900/620'
+    ]
+  },
+  'dha-phase-6-300': {
+    title: 'DHA Phase 6 — 300 Sq Yd',
+    tag: 'G+1 · Complete Construction',
+    location: 'DHA Phase 6',
+    size: '300 sq yd',
+    structure: 'G+1',
+    duration: '8 months',
+    story: 'A 300 sq yd DHA residence with a practical family layout, coordinated services, and complete finishing works.',
+    includes: ['Structural work', 'Electrical & plumbing', 'Flooring & tiling', 'Paint & finishing', 'Exterior completion'],
+    images: [
+      'https://picsum.photos/seed/dha-300-1/900/620',
+      'https://picsum.photos/seed/dha-300-2/900/620',
+      'https://picsum.photos/seed/dha-300-3/900/620',
+      'https://picsum.photos/seed/dha-300-4/900/620'
     ]
   }
 };
