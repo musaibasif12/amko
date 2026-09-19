@@ -9,10 +9,55 @@ const projectModal = document.getElementById('projectModal');
 const closeProjectModalBtn = document.getElementById('closeProjectModal');
 const projectModalCta = document.getElementById('projectModalCta');
 const processItems = Array.from(document.querySelectorAll('.process-item'));
+const reelCards = Array.from(document.querySelectorAll('.reel-card, .spotlight-media'));
+const reelModal = document.getElementById('reelModal');
+const closeReelModalBtn = document.getElementById('closeReelModal');
+let lastReelTrigger = null;
 
 let heroIndex = 0;
 let selectedRate = 2500;
 let lastScrollY = window.scrollY;
+
+function openReelModal(reelCard) {
+  if (!reelModal) return;
+
+  lastReelTrigger = reelCard;
+  const title = reelCard.dataset.reelTitle || 'AMKO Reel';
+  const copy = reelCard.dataset.reelCopy || '';
+  document.getElementById('reelModalTitle').textContent = title;
+  document.getElementById('reelModalCopy').textContent = copy;
+  reelModal.querySelector('.reel-modal-panel')?.classList.toggle(
+    'is-landscape',
+    reelCard.classList.contains('spotlight-media')
+  );
+  reelModal.classList.add('is-open');
+  reelModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  closeReelModalBtn?.focus();
+}
+
+function closeReelModal() {
+  if (!reelModal) return;
+  reelModal.classList.remove('is-open');
+  reelModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  lastReelTrigger?.focus();
+}
+
+reelCards.forEach((card) => {
+  card.addEventListener('click', () => openReelModal(card));
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openReelModal(card);
+    }
+  });
+});
+
+closeReelModalBtn?.addEventListener('click', closeReelModal);
+reelModal?.addEventListener('click', (event) => {
+  if (event.target === reelModal) closeReelModal();
+});
 
 function closeServiceCards() {
   serviceCards.forEach((card) => {
@@ -427,6 +472,9 @@ if (projectModal) {
 }
 
 document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && reelModal?.classList.contains('is-open')) {
+    closeReelModal();
+  }
   if (event.key === 'Escape' && projectModal?.classList.contains('is-open')) {
     closeProjectModal();
   }
