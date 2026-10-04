@@ -17,6 +17,7 @@ let lastReelTrigger = null;
 let heroIndex = 0;
 let selectedRate = 2500;
 let lastScrollY = window.scrollY;
+let activeProjectCard = null;
 
 function openReelModal(reelCard) {
   if (!reelModal) return;
@@ -283,92 +284,44 @@ const projectDetails = {
 };
 
 function buildModalGallery(images) {
-  const gallery = document.getElementById('modalProjectGallery');
   const dots = document.getElementById('modalProjectDots');
 
-  if (!gallery || !dots) return [];
-
-  renderModalGallery(images, 0, gallery);
+  if (!dots) return [];
 
   dots.innerHTML = images
     .map((_, index) => `<button class="project-modal-dot${index === 0 ? ' is-active' : ''}" type="button" data-slide="${index}" aria-label="Show project image ${index + 1}"></button>`)
     .join('');
 
-  if (gallery) {
-    gallery.onclick = (event) => {
-      const thumb = event.target.closest('.project-modal-thumb');
-      if (!thumb) return;
-
-      const selectedIndex = Number(thumb.dataset.slide);
-      if (!Number.isNaN(selectedIndex)) {
-        showProjectImage(selectedIndex, images);
-      }
-    };
-  }
-
   return images;
-}
-
-function renderModalGallery(images, activeIndex, gallery) {
-  if (!gallery || !images.length) return;
-
-  const visibleImages = [];
-  const imageCount = images.length;
-
-  for (let offset = 0; offset < Math.min(3, imageCount); offset += 1) {
-    const imageIndex = (activeIndex + offset) % imageCount;
-    visibleImages.push({ image: images[imageIndex], index: imageIndex });
-  }
-
-  gallery.innerHTML = visibleImages
-    .map((item, i) => `
-      <div class="project-modal-thumb${item.index === activeIndex ? ' project-modal-thumb-active' : ''}${i > 0 ? ' project-modal-thumb-slide' : ''}" data-slide="${item.index}">
-        <img src="${item.image}" alt="" />
-      </div>
-    `)
-    .join('');
 }
 
 function showProjectImage(imageIndex, images) {
   const modalImage = document.getElementById('modalProjectImage');
-  const gallery = document.getElementById('modalProjectGallery');
   const dots = document.getElementById('modalProjectDots');
-  if (!modalImage || !gallery || !dots || !images.length) return;
+  if (!modalImage || !dots || !images.length) return;
 
   const cleanIndex = (imageIndex + images.length) % images.length;
   modalImage.classList.add('project-modal-photo-fading');
 
   setTimeout(() => {
     modalImage.src = images[cleanIndex];
+    modalImage.alt = `${document.getElementById('modalProjectTitle')?.textContent || 'Project'}, image ${cleanIndex + 1}`;
     modalImage.classList.remove('project-modal-photo-fading');
   }, 280);
-
-  renderModalGallery(images, cleanIndex, gallery);
 
   Array.from(dots.children).forEach((dot, i) => {
     dot.classList.toggle('is-active', i === cleanIndex);
   });
-
-  const thumbs = Array.from(gallery.children);
-  thumbs.forEach((thumb) => {
-    thumb.classList.toggle('project-modal-thumb-active', Number(thumb.dataset.slide) === cleanIndex);
-  });
-
-  if (gallery) {
-    gallery.onclick = (event) => {
-      const thumb = event.target.closest('.project-modal-thumb');
-      if (!thumb) return;
-
-      const selectedIndex = Number(thumb.dataset.slide);
-      if (!Number.isNaN(selectedIndex)) {
-        showProjectImage(selectedIndex, images);
-      }
-    };
-  }
 }
 
 function openProjectModal(projectCard) {
   if (!projectModal) return;
+
+  activeProjectCard?.classList.remove('is-open');
+  activeProjectCard?.setAttribute('aria-expanded', 'false');
+  activeProjectCard = projectCard;
+  activeProjectCard.classList.add('is-open');
+  activeProjectCard.setAttribute('aria-expanded', 'true');
 
   const projectKey = projectCard.dataset.project || 'naya-nazimabad-400';
   const cardData = projectDetails[projectKey] || projectDetails['naya-nazimabad-400'];
@@ -388,7 +341,10 @@ function openProjectModal(projectCard) {
   if (modalStructure) modalStructure.textContent = cardData.structure;
   if (modalDuration) modalDuration.textContent = cardData.duration;
   if (modalStory) modalStory.textContent = cardData.story;
-  if (modalImage) modalImage.src = cardData.images[0];
+  if (modalImage) {
+    modalImage.src = cardData.images[0];
+    modalImage.alt = `${cardData.title}, image 1`;
+  }
 
   if (modalIncludes) {
     modalIncludes.innerHTML = cardData.includes.map((item) => `<li>${item}</li>`).join('');
@@ -437,15 +393,125 @@ function closeProjectModal() {
   projectModal.classList.remove('is-open');
   projectModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  activeProjectCard?.classList.remove('is-open');
+  activeProjectCard?.setAttribute('aria-expanded', 'false');
+  activeProjectCard = null;
 }
 
-projectCards.forEach((card) => {
-  card.addEventListener('click', () => openProjectModal(card));
+function initializeProjectCarousel(card) {
+  const carousel = card.querySelector('.project-media-stack');
+  const slides = Array.from(carousel?.querySelectorAll('.mini-media') || []);
+  if (!carousel || !slides.length) return;
+
+  const projectName = card.querySelector('.project-body h3')?.textContent.trim() || 'Project';
+  let activeIndex = 0;
+  let touchStart = null;
+  carousel.setAttribute('role', 'region');
+  carousel.setAttribute('aria-roledescription', 'carousel');
+  carousel.setAttribute('aria-label', `${projectName} project images`);
+
+  const controls = document.createElement('div');
+  controls.className = 'project-carousel-controls';
+  controls.setAttribute('aria-label', 'Project image controls');
+
+  const dots = document.createElement('div');
+  dots.className = 'project-carousel-dots';
+
+  const updateSlide = (nextIndex) => {
+    activeIndex = (nextIndex + slides.length) % slides.length;
+    slides.forEach((slide, index) => {
+      const isActive = index === activeIndex;
+      slide.classList.toggle('is-active', isActive);
+      slide.setAttribute('aria-hidden', String(!isActive));
+      slide.alt = `${projectName}, project image ${index + 1}`;
+    });
+    Array.from(dots.children).forEach((dot, index) => {
+      dot.setAttribute('aria-pressed', String(index === activeIndex));
+    });
+  };
+
+  const createArrow = (direction, label, symbol) => {
+    const button = document.createElement('button');
+    button.className = 'project-carousel-arrow';
+    button.type = 'button';
+    button.setAttribute('aria-label', label);
+    button.textContent = symbol;
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      updateSlide(activeIndex + direction);
+    });
+    button.addEventListener('keydown', (event) => event.stopPropagation());
+    return button;
+  };
+
+  slides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'project-carousel-dot';
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Show ${projectName} image ${index + 1} of ${slides.length}`);
+    dot.addEventListener('click', (event) => {
+      event.stopPropagation();
+      updateSlide(index);
+    });
+    dot.addEventListener('keydown', (event) => event.stopPropagation());
+    dots.append(dot);
+  });
+
+  controls.append(
+    createArrow(-1, `Previous ${projectName} image`, '\u2190'),
+    dots,
+    createArrow(1, `Next ${projectName} image`, '\u2192')
+  );
+  controls.addEventListener('click', (event) => event.stopPropagation());
+  controls.addEventListener('keydown', (event) => event.stopPropagation());
+  carousel.append(controls);
+  updateSlide(0);
+
+  carousel.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'touch' || event.target.closest('button')) return;
+    touchStart = { x: event.clientX, y: event.clientY };
+  });
+  carousel.addEventListener('pointerup', (event) => {
+    if (!touchStart || event.target.closest('button')) {
+      touchStart = null;
+      return;
+    }
+    const deltaX = event.clientX - touchStart.x;
+    const deltaY = event.clientY - touchStart.y;
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      updateSlide(activeIndex + (deltaX < 0 ? 1 : -1));
+    }
+    touchStart = null;
+  });
+  carousel.addEventListener('pointercancel', () => {
+    touchStart = null;
+  });
+
+  card.tabIndex = 0;
+  card.setAttribute('role', 'group');
+  card.setAttribute('aria-label', `${projectName} project card. Press Enter for details.`);
+  card.setAttribute('aria-haspopup', 'dialog');
+  card.setAttribute('aria-expanded', 'false');
+
   card.addEventListener('keydown', (event) => {
+    if (event.target !== card) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      updateSlide(activeIndex + (event.key === 'ArrowRight' ? 1 : -1));
+      return;
+    }
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       openProjectModal(card);
     }
+  });
+}
+
+projectCards.forEach((card) => {
+  initializeProjectCarousel(card);
+  card.addEventListener('click', (event) => {
+    if (event.target.closest('.project-carousel-controls')) return;
+    openProjectModal(card);
   });
 });
 
