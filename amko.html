@@ -694,79 +694,67 @@
         </div>
         <div class="estimator-box">
           <div class="estimator-form">
-            <div class="field">
-              <label for="plotSize">Plot size (sq. yd.)</label>
-              <input
-                type="number"
-                id="plotSize"
-                placeholder="e.g. 240"
-                min="20"
-              />
+            <div class="estimator-form-heading">
+              <span class="estimator-kicker">Project details</span>
+              <h3>Build your estimate</h3>
             </div>
-            <div class="field">
-              <label for="floors">Floors</label>
-              <select id="floors">
-                <option value="1">Ground Floor</option>
-                <option value="2" selected>Ground + 1</option>
-                <option value="3">Ground + 2</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="location">Location</label>
-              <select id="location">
-                <option>DHA</option>
-                <option>Naya Nazimabad</option>
-                <option>Bahria Town</option>
-                <option>Scheme 33</option>
-                <option>Saadi Town</option>
-                <option>Saadi Garden</option>
-                <option>Meerut Society</option>
-                <option>Other area in Karachi</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Construction type</label>
-              <div class="type-toggle">
-                <div
-                  class="type-opt active"
-                  data-rate="2500"
-                  onclick="selectType(this)"
-                >
-                  Grey Structure<br />with material
-                </div>
-                <div
-                  class="type-opt"
-                  data-rate="4500"
-                  onclick="selectType(this)"
-                >
-                  Complete / Turnkey<br />with material
+            <div class="estimator-fields">
+              <div class="field">
+                <label for="plotSize">Plot size <span>(sq. yd.)</span></label>
+                <input type="number" id="plotSize" placeholder="e.g. 240" min="20" />
+              </div>
+              <div class="field">
+                <label for="floors">Floors</label>
+                <select id="floors">
+                  <option value="1">Ground Floor</option>
+                  <option value="2" selected>Ground + 1</option>
+                  <option value="3">Ground + 2</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="location">Location</label>
+                <select id="location">
+                  <option>DHA</option>
+                  <option>Naya Nazimabad</option>
+                  <option>Bahria Town</option>
+                  <option>Scheme 33</option>
+                  <option>Saadi Town</option>
+                  <option>Saadi Garden</option>
+                  <option>Meerut Society</option>
+                  <option>Other area in Karachi</option>
+                </select>
+              </div>
+              <div class="field construction-field">
+                <label>Construction type</label>
+                <div class="type-toggle" role="group" aria-label="Construction type">
+                  <button class="type-opt active" type="button" data-rate="2500" aria-pressed="true">
+                    <span>Grey Structure</span>
+                    <small>With material</small>
+                  </button>
+                  <button class="type-opt" type="button" data-rate="4500" aria-pressed="false">
+                    <span>Complete / Turnkey</span>
+                    <small>With material</small>
+                  </button>
                 </div>
               </div>
             </div>
-            <button class="calc-btn" onclick="calculate()">
-              Calculate estimate
-            </button>
+            <button class="calc-btn" type="button" onclick="calculate()">Calculate estimate</button>
           </div>
+
           <div class="estimator-result">
             <div id="resultEmpty" class="result-empty">
-              Fill in your plot details and calculate to see an estimated range.
+              <span class="result-empty-title">Your estimate will appear here</span>
+              <span class="result-empty-copy">Fill in your plot details to calculate an estimated range.</span>
             </div>
-            <div id="resultBox" style="display: none">
-              <div class="result-label">Estimated Construction Range</div>
+            <div id="resultBox" hidden>
+              <div class="result-kicker">Estimated project cost</div>
               <div class="result-range" id="resultRange"></div>
-              <div class="result-disclaimer">
-                Final cost depends on design, specifications, materials and site
-                conditions. This range is a starting estimate, not a quotation.
+              <div class="result-details">
+                <span id="resultArea"></span>
+                <span id="resultRate"></span>
               </div>
-              <button
-                class="btn btn-gold wa-btn show"
-                id="waBtn"
-                onclick="sendToWhatsApp()"
-              >
-                <svg class="icon" style="color: var(--ink-900)">
-                  <use href="#ic-phone" /></svg
-                >Get a personalized estimate
-              </button>
+              <p class="result-disclaimer">This range is an initial estimate, not a fixed quotation. Final cost depends on design, specifications, materials and site conditions.</p>
+              <button class="btn btn-gold wa-btn show" id="waBtn" type="button" onclick="sendToWhatsApp()">Get a personalized estimate</button>
             </div>
           </div>
         </div>

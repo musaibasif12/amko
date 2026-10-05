@@ -555,7 +555,9 @@ heroTypeButtons.forEach((btn) => {
     heroTypeButtons.forEach((b) => b.classList.toggle('is-selected', b === btn));
 
     document.querySelectorAll('.type-opt').forEach((opt) => {
-      opt.classList.toggle('active', Number(opt.dataset.rate) === rate);
+      const isSelected = Number(opt.dataset.rate) === rate;
+      opt.classList.toggle('active', isSelected);
+      opt.setAttribute('aria-pressed', String(isSelected));
     });
   });
 });
@@ -587,47 +589,81 @@ setInterval(() => {
 }, slideHold);
 
 function selectType(el){
-  document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
-  selectedRate = parseInt(el.getAttribute('data-rate'));
+  document.querySelectorAll('.type-opt').forEach((option) => {
+    const isSelected = option === el;
+    option.classList.toggle('active', isSelected);
+    option.setAttribute('aria-pressed', String(isSelected));
+  });
+  selectedRate = Number.parseInt(el.getAttribute('data-rate'), 10);
 
   const matchingHeroType = heroTypeButtons.find((btn) => Number(btn.dataset.rate) === selectedRate);
   if (matchingHeroType) {
     heroTypeButtons.forEach((btn) => btn.classList.toggle('is-selected', btn === matchingHeroType));
   }
 }
-  function formatLakh(num){ return (num/100000).toFixed(1) + ' lac'; }
-  function calculate(){
-    const plotSize = parseFloat(document.getElementById('plotSize').value);
-    const floors = parseInt(document.getElementById('floors').value);
-    if(!plotSize || plotSize <= 0){
-      document.getElementById('plotSize').focus();
-      document.getElementById('plotSize').style.borderColor = '#c2953f';
-      return;
-    }
-    const coveredAreaPerFloor = plotSize * 9 * 0.85;
-    const totalCoveredArea = coveredAreaPerFloor * floors;
-    const midCost = totalCoveredArea * selectedRate;
-    const lowCost = midCost * 0.9, highCost = midCost * 1.1;
-    document.getElementById('resultEmpty').style.display = 'none';
-    document.getElementById('resultBox').style.display = 'block';
-    document.getElementById('resultRange').textContent = 'Rs ' + formatLakh(lowCost) + ' – Rs ' + formatLakh(highCost);
-    window._lastEstimate = {plotSize, floors, selectedRate, lowCost, highCost};
+
+document.querySelectorAll('.type-opt').forEach((option) => {
+  option.addEventListener('click', () => selectType(option));
+});
+
+function formatLakh(num) {
+  return (num / 100000).toFixed(1) + ' lac';
+}
+
+function calculate() {
+  const plotSizeInput = document.getElementById('plotSize');
+  const plotSize = Number.parseFloat(plotSizeInput.value);
+  const resultEmpty = document.getElementById('resultEmpty');
+  const resultBox = document.getElementById('resultBox');
+
+  if (!Number.isFinite(plotSize) || plotSize <= 0) {
+    plotSizeInput.focus();
+    plotSizeInput.style.borderColor = 'var(--gold-500)';
+    return;
   }
-  function sendToWhatsApp(){
-    const loc = document.getElementById('location').value;
-    const est = window._lastEstimate;
-    if(!est) return;
-    const typeLabel = est.selectedRate === 2500 ? 'Grey Structure with material' : 'Complete/Turnkey with material';
-    const floorsLabel = est.floors === 1 ? 'Ground Floor' : est.floors === 2 ? 'Ground + 1' : 'Ground + 2';
-    const msg = `Hi AMKO, I'd like a personalized estimate.\nLocation: ${loc}\nPlot size: ${est.plotSize} sq. yd.\nFloors: ${floorsLabel}\nConstruction type: ${typeLabel}`;
-    window.open('https://wa.me/923222538025?text=' + encodeURIComponent(msg), '_blank');
-  }
-  function sendContactForm(){
-    const name = document.getElementById('cName').value || 'there';
-    const phone = document.getElementById('cPhone').value;
-    const area = document.getElementById('cArea').value;
-    const type = document.getElementById('cType').value;
-    const msg = `Hi AMKO, my name is ${name}.\nPhone: ${phone}\nArea: ${area}\nProject type: ${type}`;
-    window.open('https://wa.me/923222538025?text=' + encodeURIComponent(msg), '_blank');
-  }
+
+  plotSizeInput.style.borderColor = '';
+  const floors = Number.parseInt(document.getElementById('floors').value, 10);
+  const coveredArea = plotSize * 9 * 0.85 * floors;
+  const midCost = coveredArea * selectedRate;
+  const lowCost = midCost * 0.9;
+  const highCost = midCost * 1.1;
+
+  resultEmpty.hidden = true;
+  resultBox.hidden = false;
+  document.getElementById('resultRange').textContent =
+    `Rs ${formatLakh(lowCost)} – Rs ${formatLakh(highCost)}`;
+  document.getElementById('resultArea').textContent =
+    `Estimated covered area: ${Math.round(coveredArea).toLocaleString('en-US')} sq. ft.`;
+  document.getElementById('resultRate').textContent =
+    `Estimated rate: Rs ${selectedRate.toLocaleString('en-US')} / sq. ft.`;
+  window._lastEstimate = {
+    plotSize,
+    floors,
+    selectedRate,
+    lowCost,
+    highCost
+  };
+}
+
+function sendToWhatsApp() {
+  const location = document.getElementById('location').value;
+  const estimate = window._lastEstimate;
+  if (!estimate) return;
+
+  const constructionType = estimate.selectedRate === 2500
+    ? 'Grey Structure with material'
+    : 'Complete / Turnkey with material';
+  const floorsLabel = ['Ground Floor', 'Ground + 1', 'Ground + 2'][estimate.floors - 1] || 'Ground + 1';
+  const message = `Hi AMKO, I'd like a personalized estimate.\nLocation: ${location}\nPlot size: ${estimate.plotSize} sq. yd.\nFloors: ${floorsLabel}\nConstruction type: ${constructionType}`;
+  window.open(`https://wa.me/923222538025?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+function sendContactForm(){
+  const name = document.getElementById('cName').value || 'there';
+  const phone = document.getElementById('cPhone').value;
+  const area = document.getElementById('cArea').value;
+  const type = document.getElementById('cType').value;
+  const msg = `Hi AMKO, my name is ${name}.\nPhone: ${phone}\nArea: ${area}\nProject type: ${type}`;
+  window.open('https://wa.me/923222538025?text=' + encodeURIComponent(msg), '_blank');
+}
