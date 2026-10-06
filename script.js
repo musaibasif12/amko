@@ -14,6 +14,8 @@ const processItems = Array.from(document.querySelectorAll('.process-item'));
 const reelCards = Array.from(document.querySelectorAll('.reel-card, .spotlight-media'));
 const reelModal = document.getElementById('reelModal');
 const closeReelModalBtn = document.getElementById('closeReelModal');
+const reelModalPlayer = document.getElementById('reelModalPlayer');
+const reelModalPlaceholder = reelModal?.querySelector('.reel-modal-placeholder');
 let lastReelTrigger = null;
 
 let heroIndex = 0;
@@ -77,14 +79,33 @@ function openReelModal(reelCard) {
   if (!reelModal) return;
 
   lastReelTrigger = reelCard;
+  setReelPreviewsActive(false);
   const title = reelCard.dataset.reelTitle || 'AMKO Reel';
   const copy = reelCard.dataset.reelCopy || '';
+  const videoSrc = reelCard.dataset.videoSrc;
   document.getElementById('reelModalTitle').textContent = title;
   document.getElementById('reelModalCopy').textContent = copy;
   reelModal.querySelector('.reel-modal-panel')?.classList.toggle(
     'is-landscape',
     reelCard.classList.contains('spotlight-media')
   );
+  if (reelModalPlayer && reelModalPlaceholder) {
+    reelModalPlayer.pause();
+    reelModalPlayer.hidden = !videoSrc;
+    reelModalPlaceholder.hidden = Boolean(videoSrc);
+    if (videoSrc) {
+      reelModalPlayer.src = videoSrc;
+      reelModalPlayer.load();
+      reelModalPlayer.play().catch((error) => {
+        if (!['AbortError', 'NotAllowedError'].includes(error.name)) {
+          console.error('Unable to play featured project video.', error);
+        }
+      });
+    } else {
+      reelModalPlayer.removeAttribute('src');
+      reelModalPlayer.load();
+    }
+  }
   reelModal.classList.add('is-open');
   reelModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -98,6 +119,14 @@ function closeReelModal() {
   reelModal.classList.remove('is-open');
   reelModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (reelModalPlayer && reelModalPlaceholder) {
+    reelModalPlayer.pause();
+    reelModalPlayer.removeAttribute('src');
+    reelModalPlayer.load();
+    reelModalPlayer.hidden = true;
+    reelModalPlaceholder.hidden = false;
+  }
+  setReelPreviewsActive(true);
   lastReelTrigger?.focus();
 }
 
@@ -110,6 +139,59 @@ reelCards.forEach((card) => {
     }
   });
 });
+
+const reelPreviewObserver = 'IntersectionObserver' in window
+  ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const preview = entry.target;
+        if (entry.isIntersecting) {
+          if (!preview.src) preview.src = preview.closest('.reel-card').dataset.videoSrc;
+          if (preview.paused) {
+            preview.play().catch((error) => {
+              if (!['AbortError', 'NotAllowedError'].includes(error.name)) {
+                console.error('Unable to play featured project preview.', error);
+              }
+            });
+          }
+        } else if (!preview.paused) {
+          preview.pause();
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '50px' })
+  : null;
+
+document.querySelectorAll('[data-reel-preview]').forEach((preview) => {
+  if (reelPreviewObserver) {
+    reelPreviewObserver.observe(preview);
+  } else {
+    preview.src = preview.closest('.reel-card').dataset.videoSrc;
+    preview.play().catch((error) => {
+      if (!['AbortError', 'NotAllowedError'].includes(error.name)) {
+        console.error('Unable to play featured project preview.', error);
+      }
+    });
+  }
+});
+
+function setReelPreviewsActive(isActive) {
+  document.querySelectorAll('[data-reel-preview]').forEach((preview) => {
+    if (!isActive) {
+      preview.pause();
+      reelPreviewObserver?.unobserve(preview);
+      return;
+    }
+
+    if (reelPreviewObserver) {
+      reelPreviewObserver.observe(preview);
+    } else if (preview.paused) {
+      preview.play().catch((error) => {
+        if (!['AbortError', 'NotAllowedError'].includes(error.name)) {
+          console.error('Unable to play featured project preview.', error);
+        }
+      });
+    }
+  });
+}
 
 closeReelModalBtn?.addEventListener('click', closeReelModal);
 reelModal?.addEventListener('click', (event) => {
