@@ -90,113 +90,101 @@
         <div class="logo" aria-label="AMKO Engineering Services logo">
           <img src="./logo.png" alt="AMKO Engineering Services logo" />
         </div>
-        <nav>
-          <a href="#media">Media</a>
+        <nav id="primary-navigation" aria-label="Main navigation">
+          <a href="#projects">Projects</a>
           <a href="#services">Services</a>
           <a href="#why">Why AMKO</a>
           <a href="#process">Process</a>
-          <a href="#projects">Musaib Projects</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact</a>
+          <a
+            class="btn btn-gold nav-cta"
+            href="https://wa.me/923222538025"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Start Your Project</a>
         </nav>
-        <button
+        <a
           class="btn btn-gold"
-          onclick="window.open('https://wa.me/923222538025', '_blank')"
+          href="https://wa.me/923222538025"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Start Your Project
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </button>
       </div>
     </header>
 
     <section class="hero">
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-slideshow">
+          <article class="hero-slide is-active">
+            <img
+              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=85"
+              alt=""
+            />
+          </article>
+          <article class="hero-slide">
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2000&q=85"
+              alt=""
+            />
+          </article>
+          <article class="hero-slide">
+            <img
+              src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=2000&q=85"
+              alt=""
+            />
+          </article>
+        </div>
+      </div>
       <div class="wrap">
-        <div>
+        <div class="hero-content">
           <div class="hero-badge">
             <span class="dot-live"></span>200+ <span class="white">Homes Built Across Karachi</span>
           </div>
-          <h1>Trusted to build<br /><em><span class="highlight">Karachi homes.</span></em></h1>
+          <h1>Building Karachi's<br />homes.<br /><em>Built to last.</em></h1>
           <p>
-            Residential construction across DHA, Naya Nazimabad, Bahria Town and
-            Scheme 33 — built on time, with transparent pricing.
+            Complete residential construction with transparent pricing, quality
+            materials, and professional execution.
           </p>
           <div class="hero-actions">
             <a class="btn btn-gold" href="#contact">
-              <svg class="icon" style="color: var(--ink-900)">
-                <use href="#ic-arrow" />
-              </svg>
-              Start your project
+              Get a free consultation
+              <svg class="icon" aria-hidden="true"><use href="#ic-arrow" /></svg>
             </a>
-            <a class="btn btn-ghost-dark" href="#projects">View all projects</a>
+            <a class="btn btn-ghost-dark" href="#projects">Explore projects</a>
           </div>
-        </div>
-
-        <div class="hero-visual" aria-live="polite">
-          <div class="hero-slideshow">
-            <article
-              class="hero-slide is-active"
-              data-title="Naya Nazimabad"
-              data-copy="Complete construction for a modern family residence in a fast-growing Karachi community."
-            >
-              <img
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
-                alt="Completed Naya Nazimabad project"
-              />
-            </article>
-            <article
-              class="hero-slide"
-              data-title="DHA Residence"
-              data-copy="Premium residential build with careful detailing, smooth finishes, and practical space planning."
-            >
-              <img
-                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-                alt="Completed DHA project"
-              />
-            </article>
-            <article
-              class="hero-slide"
-              data-title="Bahria Town Villa"
-              data-copy="Luxury-quality villa project completed with premium materials and balanced design execution."
-            >
-              <img
-                src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80"
-                alt="Completed Bahria Town villa project"
-              />
-            </article>
-          </div>
-
-          <div class="hero-slide-copy">
-            <span class="slide-label">Completed project</span>
-            <h3 id="heroSlideTitle">Naya Nazimabad</h3>
-            <p id="heroSlideCopy">
-              Complete construction for a modern family residence in a
-              fast-growing Karachi community.
-            </p>
-          </div>
-
-          <div class="hero-dots" aria-label="Slideshow navigation">
-            <button
-              class="dot-button is-active"
-              type="button"
-              data-slide="0"
-              aria-label="Show first project"
-            ></button>
-            <button
-              class="dot-button"
-              type="button"
-              data-slide="1"
-              aria-label="Show second project"
-            ></button>
-            <button
-              class="dot-button"
-              type="button"
-              data-slide="2"
-              aria-label="Show third project"
-            ></button>
+          <div class="hero-trust-points" role="group" aria-label="Our commitments">
+            <div class="hero-trust-point">
+              <svg class="icon" aria-hidden="true"><use href="#ic-shield" /></svg>
+              <span>Quality<br />construction</span>
+            </div>
+            <div class="hero-trust-point">
+              <svg class="icon" aria-hidden="true"><use href="#ic-percent" /></svg>
+              <span>Transparent<br />pricing</span>
+            </div>
+            <div class="hero-trust-point">
+              <svg class="icon" aria-hidden="true"><use href="#ic-clock" /></svg>
+              <span>On-time<br />delivery</span>
+            </div>
           </div>
         </div>
       </div>
       <div class="stats-bar">
         <div class="wrap">
+          <div class="stats-intro">Why clients trust AMKO</div>
           <div class="stat-cell">
             <svg class="icon"><use href="#ic-award" /></svg>
             <div class="num-wrap">
@@ -285,62 +273,144 @@
         <div class="section-head">
           <div class="eyebrow">Our Services</div>
           <h2>Building, improving, and maintaining your property</h2>
+          <p>One team to plan, coordinate, and oversee the work—from first scope to final handover.</p>
         </div>
 
         <div class="service-grid">
-          <article class="service-card" tabindex="0" role="button" aria-expanded="false">
-            <div class="service-photo">
-              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt="Residential construction project in progress" />
-              <span class="service-number">01</span>
+          <article class="service-card">
+            <div class="service-card-photo">
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80" alt="Completed residential construction project" loading="lazy" />
             </div>
-            <div class="service-body">
-              <div class="service-kicker">
-                <span class="service-kicker-icon" aria-hidden="true">▣</span>
-                Construction
-              </div>
-              <h3>Construction</h3>
-              <p>
-                Complete residential construction from planning through execution, with professional supervision and a focus on quality, transparency, and dependable execution.
-              </p>
+            <div class="service-card-icon" aria-hidden="true">
+              <svg class="icon"><use href="#ic-plan" /></svg>
             </div>
+            <p class="service-card-label">Construction</p>
+            <h3>Build with confidence.</h3>
+            <p class="service-card-copy">
+              From planning to handover, we manage your home construction with
+              professional supervision and attention to every detail.
+            </p>
+            <button class="service-explore" type="button" data-service-target="construction" aria-haspopup="dialog" aria-controls="serviceDialog">
+              Explore service
+              <svg class="icon" aria-hidden="true"><use href="#ic-arrow" /></svg>
+            </button>
           </article>
 
-          <article class="service-card" tabindex="0" role="button" aria-expanded="false">
-            <div class="service-photo">
-              <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Home renovation and interior upgrade" />
-              <span class="service-number">02</span>
+          <article class="service-card">
+            <div class="service-card-photo">
+              <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80" alt="Renovated home interior" loading="lazy" />
             </div>
-            <div class="service-body">
-              <div class="service-kicker">
-                <span class="service-kicker-icon" aria-hidden="true">◫</span>
-                Renovation
-              </div>
-              <h3>Renovation</h3>
-              <p>
-                Transform existing spaces with thoughtful renovation, upgrades, and improvements tailored to the property's needs.
-              </p>
+            <div class="service-card-icon" aria-hidden="true">
+              <svg class="icon"><use href="#ic-hammer" /></svg>
             </div>
+            <p class="service-card-label">Renovation</p>
+            <h3>Give your home a better life.</h3>
+            <p class="service-card-copy">
+              Upgrade existing spaces with thoughtful renovation, quality
+              workmanship and practical design solutions.
+            </p>
+            <button class="service-explore" type="button" data-service-target="renovation" aria-haspopup="dialog" aria-controls="serviceDialog">
+              Explore service
+              <svg class="icon" aria-hidden="true"><use href="#ic-arrow" /></svg>
+            </button>
           </article>
 
-          <article class="service-card" tabindex="0" role="button" aria-expanded="false">
-            <div class="service-photo">
-              <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80" alt="Property maintenance and repair work" />
-              <span class="service-number">03</span>
+          <article class="service-card">
+            <div class="service-card-photo">
+              <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1000&q=80" alt="Well-maintained residential property" loading="lazy" />
             </div>
-            <div class="service-body">
-              <div class="service-kicker">
-                <span class="service-kicker-icon" aria-hidden="true">◌</span>
-                Maintenance
-              </div>
-              <h3>Maintenance</h3>
-              <p>
-                Reliable maintenance and repair solutions to keep homes and properties functional, safe, and well maintained.
-              </p>
+            <div class="service-card-icon" aria-hidden="true">
+              <svg class="icon"><use href="#ic-tool" /></svg>
             </div>
+            <p class="service-card-label">Maintenance</p>
+            <h3>Keep your property in shape.</h3>
+            <p class="service-card-copy">
+              Reliable maintenance and repair services to protect your property
+              and keep everything working as it should.
+            </p>
+            <button class="service-explore" type="button" data-service-target="maintenance" aria-haspopup="dialog" aria-controls="serviceDialog">
+              Explore service
+              <svg class="icon" aria-hidden="true"><use href="#ic-arrow" /></svg>
+            </button>
           </article>
         </div>
       </div>
     </section>
+
+    <dialog class="service-dialog" id="serviceDialog" aria-labelledby="serviceDialogTitle">
+      <div class="service-dialog-panel">
+        <form method="dialog">
+          <button class="service-dialog-close" type="submit" aria-label="Close service details">×</button>
+        </form>
+        <div class="service-dialog-kicker">Service overview</div>
+        <h2 class="service-dialog-title" id="serviceDialogTitle"></h2>
+
+        <section class="service-dialog-view" data-service-detail="construction" aria-labelledby="serviceDialogTitle" hidden>
+          <div class="service-detail-grid">
+            <div class="service-detail-block">
+              <div class="service-detail-label">What we do</div>
+              <ul class="service-detail-list">
+                <li>Planning &amp; estimation</li>
+                <li>Material coordination</li>
+                <li>Civil &amp; structural work</li>
+                <li>Electrical &amp; plumbing</li>
+                <li>Finishing &amp; handover</li>
+              </ul>
+            </div>
+            <div class="service-detail-block">
+              <div class="service-detail-label">Our approach</div>
+              <p>We manage each stage with clear scope, material coordination, and professional site supervision. You stay informed from the first plan through final handover.</p>
+              <div class="service-detail-label service-ideal-label">Ideal for</div>
+              <p>New homes, residential projects, and clients looking for professionally managed construction.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="service-dialog-view" data-service-detail="renovation" aria-labelledby="serviceDialogTitle" hidden>
+          <div class="service-detail-grid">
+            <div class="service-detail-block">
+              <div class="service-detail-label">What we do</div>
+              <ul class="service-detail-list">
+                <li>Space upgrades</li>
+                <li>Structural changes</li>
+                <li>Kitchen &amp; bathroom renovation</li>
+                <li>Flooring &amp; ceiling work</li>
+                <li>Painting &amp; finishing</li>
+              </ul>
+            </div>
+            <div class="service-detail-block">
+              <div class="service-detail-label">Our approach</div>
+              <p>We assess the existing space, understand what needs to change, and plan the work before execution. Each upgrade is completed with care and quality workmanship.</p>
+              <div class="service-detail-label service-ideal-label">Ideal for</div>
+              <p>Homeowners upgrading, modernizing, or improving an existing property.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="service-dialog-view" data-service-detail="maintenance" aria-labelledby="serviceDialogTitle" hidden>
+          <div class="service-detail-grid">
+            <div class="service-detail-block">
+              <div class="service-detail-label">What we do</div>
+              <ul class="service-detail-list">
+                <li>General repairs</li>
+                <li>Plumbing &amp; electrical work</li>
+                <li>Painting &amp; finishing</li>
+                <li>Property upkeep</li>
+                <li>Preventive maintenance</li>
+              </ul>
+            </div>
+            <div class="service-detail-block">
+              <div class="service-detail-label">Our approach</div>
+              <p>We help identify and address maintenance needs early, with practical repairs and dependable workmanship to help prevent bigger, more costly issues.</p>
+              <div class="service-detail-label service-ideal-label">Ideal for</div>
+              <p>Homeowners and property owners who want their spaces maintained properly and consistently.</p>
+            </div>
+          </div>
+        </section>
+
+        <a class="btn btn-gold service-dialog-cta" href="#contact">Discuss your project</a>
+      </div>
+    </dialog>
 
     <section class="why" id="why">
       <div class="wrap">
@@ -605,6 +675,11 @@
             </div>
           </div>
         </div>
+        <div class="faq-cta project-cta">
+          <h3>Have a project in mind?</h3>
+          <p>Tell us what you’re planning, and our team will help you take the next step.</p>
+          <a class="btn btn-gold" href="#contact">Get a free consultation</a>
+        </div>
       </div>
     </section>
 
@@ -676,90 +751,11 @@
               </ul>
             </div>
 
-            <a class="btn btn-gold project-modal-cta" id="projectModalCta" href="#estimator">Want a project like this? Get a free estimate</a>
+            <a class="btn btn-gold project-modal-cta" id="projectModalCta" href="#contact">Discuss a project like this</a>
           </div>
         </div>
       </div>
     </div>
-
-    <section class="estimator" id="estimator">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">Cost Estimator</div>
-          <h2>What might your project cost?</h2>
-          <p>
-            Get a realistic range in seconds. This isn't a fixed quote — it's a
-            starting point for a real conversation with our team.
-          </p>
-        </div>
-        <div class="estimator-box">
-          <div class="estimator-form">
-            <div class="estimator-form-heading">
-              <span class="estimator-kicker">Project details</span>
-              <h3>Build your estimate</h3>
-            </div>
-            <div class="estimator-fields">
-              <div class="field">
-                <label for="plotSize">Plot size <span>(sq. yd.)</span></label>
-                <input type="number" id="plotSize" placeholder="e.g. 240" min="20" />
-              </div>
-              <div class="field">
-                <label for="floors">Floors</label>
-                <select id="floors">
-                  <option value="1">Ground Floor</option>
-                  <option value="2" selected>Ground + 1</option>
-                  <option value="3">Ground + 2</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="location">Location</label>
-                <select id="location">
-                  <option>DHA</option>
-                  <option>Naya Nazimabad</option>
-                  <option>Bahria Town</option>
-                  <option>Scheme 33</option>
-                  <option>Saadi Town</option>
-                  <option>Saadi Garden</option>
-                  <option>Meerut Society</option>
-                  <option>Other area in Karachi</option>
-                </select>
-              </div>
-              <div class="field construction-field">
-                <label>Construction type</label>
-                <div class="type-toggle" role="group" aria-label="Construction type">
-                  <button class="type-opt active" type="button" data-rate="2500" aria-pressed="true">
-                    <span>Grey Structure</span>
-                    <small>With material</small>
-                  </button>
-                  <button class="type-opt" type="button" data-rate="4500" aria-pressed="false">
-                    <span>Complete / Turnkey</span>
-                    <small>With material</small>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <button class="calc-btn" type="button" onclick="calculate()">Calculate estimate</button>
-          </div>
-
-          <div class="estimator-result">
-            <div id="resultEmpty" class="result-empty">
-              <span class="result-empty-title">Your estimate will appear here</span>
-              <span class="result-empty-copy">Fill in your plot details to calculate an estimated range.</span>
-            </div>
-            <div id="resultBox" hidden>
-              <div class="result-kicker">Estimated project cost</div>
-              <div class="result-range" id="resultRange"></div>
-              <div class="result-details">
-                <span id="resultArea"></span>
-                <span id="resultRate"></span>
-              </div>
-              <p class="result-disclaimer">This range is an initial estimate, not a fixed quotation. Final cost depends on design, specifications, materials and site conditions.</p>
-              <button class="btn btn-gold wa-btn show" id="waBtn" type="button" onclick="sendToWhatsApp()">Get a personalized estimate</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section class="testimonials" id="testimonials">
       <div class="wrap">
@@ -1162,8 +1158,8 @@
             <p>
               Grey structure starts around Rs 2,500/sq. ft., and
               complete/turnkey construction around Rs 4,500/sq. ft. Final
-              pricing depends on design and material specifications — use the
-              estimator above for a range on your plot.
+              pricing depends on design and material specifications. Contact
+              AMKO for a project-specific estimate.
             </p>
           </details>
           <details>
@@ -1225,6 +1221,11 @@
             </p>
           </details>
         </div>
+        <div class="faq-cta">
+          <h3>Ready to start your project?</h3>
+          <p>Share a few details, and our team will help you plan the next step.</p>
+          <a class="btn btn-gold" href="#contact">Talk to our team</a>
+        </div>
       </div>
     </section>
 
@@ -1240,17 +1241,24 @@
         </div>
         <div class="contact-grid">
           <div class="contact-form">
+            <h3>Tell us about your project</h3>
             <div class="field">
               <label for="cName">Your name</label
               ><input
                 type="text"
                 id="cName"
+                autocomplete="name"
                 placeholder="Enter your full name"
               />
             </div>
             <div class="field">
               <label for="cPhone">Phone number</label
-              ><input type="text" id="cPhone" placeholder="+92 3XX XXXXXXX" />
+              ><input
+                type="tel"
+                id="cPhone"
+                autocomplete="tel"
+                placeholder="+92 3XX XXXXXXX"
+              />
             </div>
             <div class="field">
               <label for="cArea">Area / location</label
@@ -1296,13 +1304,14 @@
                 >
               </div>
             </div>
-            <div class="map-block ph">
-              <img src="https://picsum.photos/seed/amko-map/700/300" alt="" />
-              <div class="ph-tag">
-                <svg class="icon" style="width: 14px; height: 14px">
-                  <use href="#ic-map" /></svg
-                >Office#02, E 6/3 B Nazimabad #02, Karachi
-              </div>
+            <div class="map-block">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.770885721575!2d67.03719149999999!3d24.905795599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x25e5ecb884565d93%3A0x6342d36ebaa3d57c!2sAMKO%20Engineering%20Services!5e0!3m2!1sen!2s!4v1791273495349!5m2!1sen!2s"
+                title="AMKO Engineering Services location on Google Maps"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
         </div>

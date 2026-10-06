@@ -1,9 +1,11 @@
 const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
-const heroDots = Array.from(document.querySelectorAll('.dot-button'));
-const heroTitle = document.getElementById('heroSlideTitle');
-const heroCopy = document.getElementById('heroSlideCopy');
 const header = document.querySelector('header');
-const serviceCards = Array.from(document.querySelectorAll('.service-card'));
+const menuToggle = document.querySelector('.menu-toggle');
+const primaryNavigation = document.getElementById('primary-navigation');
+const serviceTriggers = Array.from(document.querySelectorAll('.service-explore'));
+const serviceDialog = document.getElementById('serviceDialog');
+const serviceDialogTitle = document.getElementById('serviceDialogTitle');
+const serviceDialogViews = Array.from(document.querySelectorAll('.service-dialog-view'));
 const projectCards = Array.from(document.querySelectorAll('#projects .project-card'));
 const projectModal = document.getElementById('projectModal');
 const closeProjectModalBtn = document.getElementById('closeProjectModal');
@@ -15,9 +17,61 @@ const closeReelModalBtn = document.getElementById('closeReelModal');
 let lastReelTrigger = null;
 
 let heroIndex = 0;
-let selectedRate = 2500;
 let lastScrollY = window.scrollY;
 let activeProjectCard = null;
+let lastProjectTrigger = null;
+let lastServiceTrigger = null;
+
+function setPrimaryNavigationOpen(isOpen) {
+  if (!menuToggle || !primaryNavigation) return;
+
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  primaryNavigation.classList.toggle('is-open', isOpen);
+  header?.classList.toggle('has-open-nav', isOpen);
+}
+
+function keepModalFocusInside(event, modal) {
+  if (event.key !== 'Tab') return;
+
+  const focusableElements = Array.from(
+    modal.querySelectorAll('a[href], button:not(:disabled), [tabindex]:not([tabindex="-1"])')
+  ).filter((element) => !element.hidden && element.getClientRects().length);
+  if (!focusableElements.length) return;
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  } else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+}
+
+menuToggle?.addEventListener('click', () => {
+  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  setPrimaryNavigationOpen(!isOpen);
+});
+
+primaryNavigation?.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => {
+    const menuWasOpen = menuToggle?.getAttribute('aria-expanded') === 'true';
+    setPrimaryNavigationOpen(false);
+    if (menuWasOpen) menuToggle.focus();
+  });
+});
+
+document.addEventListener('click', (event) => {
+  if (header && !header.contains(event.target)) {
+    setPrimaryNavigationOpen(false);
+  }
+});
+
+window.matchMedia('(max-width: 1000px)').addEventListener('change', (event) => {
+  if (!event.matches) setPrimaryNavigationOpen(false);
+});
 
 function openReelModal(reelCard) {
   if (!reelModal) return;
@@ -34,7 +88,9 @@ function openReelModal(reelCard) {
   reelModal.classList.add('is-open');
   reelModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  closeReelModalBtn?.focus();
+  window.setTimeout(() => {
+    if (reelModal.classList.contains('is-open')) closeReelModalBtn?.focus();
+  }, 0);
 }
 
 function closeReelModal() {
@@ -59,64 +115,65 @@ closeReelModalBtn?.addEventListener('click', closeReelModal);
 reelModal?.addEventListener('click', (event) => {
   if (event.target === reelModal) closeReelModal();
 });
+reelModal?.addEventListener('keydown', (event) => keepModalFocusInside(event, reelModal));
 
-function closeServiceCards() {
-  serviceCards.forEach((card) => {
-    card.classList.remove('is-open');
-    card.setAttribute('aria-expanded', 'false');
+serviceTriggers.forEach((trigger) => {
+  trigger.addEventListener('click', () => {
+    if (!serviceDialog || !serviceDialogTitle) return;
+
+    const service = trigger.dataset.serviceTarget;
+    const serviceCard = trigger.closest('.service-card');
+    const serviceName = serviceCard?.querySelector('.service-card-label')?.textContent?.trim();
+    const activeView = serviceDialogViews.find((view) => view.dataset.serviceDetail === service);
+    if (!serviceName || !activeView) return;
+
+    lastServiceTrigger = trigger;
+    serviceDialogTitle.textContent = serviceName;
+    serviceDialogViews.forEach((view) => {
+      view.hidden = view !== activeView;
+    });
+    serviceDialog.showModal();
   });
-}
+});
 
-function toggleServiceCard(card) {
-  const isOpen = !card.classList.contains('is-open');
-  closeServiceCards();
-
-  if (!isOpen) return;
-
-  card.classList.add('is-open');
-  card.setAttribute('aria-expanded', String(isOpen));
-}
-
-serviceCards.forEach((card) => {
-  card.addEventListener('click', () => toggleServiceCard(card));
-  card.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      toggleServiceCard(card);
-    }
+document.querySelectorAll('.service-card').forEach((card) => {
+  card.addEventListener('click', (event) => {
+    if (event.target.closest('.service-explore')) return;
+    card.querySelector('.service-explore')?.click();
   });
+});
+
+serviceDialog?.addEventListener('click', (event) => {
+  if (event.target === serviceDialog) serviceDialog.close();
+});
+
+serviceDialog?.addEventListener('close', () => {
+  lastServiceTrigger?.focus();
+});
+
+serviceDialog?.querySelector('.service-dialog-cta')?.addEventListener('click', () => {
+  serviceDialog.close();
 });
 
 function showHeroSlide(index) {
   if (!heroSlides.length) return;
 
   heroIndex = (index + heroSlides.length) % heroSlides.length;
-
   heroSlides.forEach((slide, i) => {
     slide.classList.toggle('is-active', i === heroIndex);
   });
-
-  heroDots.forEach((dot, i) => {
-    dot.classList.toggle('is-active', i === heroIndex);
-  });
-
-  const activeSlide = heroSlides[heroIndex];
-  if (activeSlide && heroTitle && heroCopy) {
-    heroTitle.textContent = activeSlide.dataset.title || '';
-    heroCopy.textContent = activeSlide.dataset.copy || '';
-  }
 }
-
-heroDots.forEach((dot) => {
-  dot.addEventListener('click', () => {
-    showHeroSlide(Number(dot.dataset.slide));
-  });
-});
 
 function animateStatNumber(element) {
   if (!element || element.dataset.animated === 'true') return;
 
   const targetText = element.dataset.target || '0';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    element.textContent = targetText;
+    element.dataset.animated = 'true';
+    return;
+  }
+
   const match = targetText.match(/\d+(?:\.\d+)?/);
   if (!match) return;
 
@@ -317,6 +374,7 @@ function showProjectImage(imageIndex, images) {
 function openProjectModal(projectCard) {
   if (!projectModal) return;
 
+  lastProjectTrigger = projectCard;
   activeProjectCard?.classList.remove('is-open');
   activeProjectCard?.setAttribute('aria-expanded', 'false');
   activeProjectCard = projectCard;
@@ -368,22 +426,29 @@ function openProjectModal(projectCard) {
     modalMedia.onmouseenter = () => clearInterval(window.projectCarouselTimer);
     modalMedia.onmouseleave = () => {
       clearInterval(window.projectCarouselTimer);
-      window.projectCarouselTimer = setInterval(() => {
-        imageIndex = (imageIndex + 1) % images.length;
-        showProjectImage(imageIndex, images);
-      }, 3500);
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.projectCarouselTimer = setInterval(() => {
+          imageIndex = (imageIndex + 1) % images.length;
+          showProjectImage(imageIndex, images);
+        }, 3500);
+      }
     };
   }
 
   clearInterval(window.projectCarouselTimer);
-  window.projectCarouselTimer = setInterval(() => {
-    imageIndex = (imageIndex + 1) % images.length;
-    showProjectImage(imageIndex, images);
-  }, 3500);
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.projectCarouselTimer = setInterval(() => {
+      imageIndex = (imageIndex + 1) % images.length;
+      showProjectImage(imageIndex, images);
+    }, 3500);
+  }
 
   projectModal.classList.add('is-open');
   projectModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  window.setTimeout(() => {
+    if (projectModal.classList.contains('is-open')) closeProjectModalBtn?.focus();
+  }, 0);
 }
 
 function closeProjectModal() {
@@ -396,7 +461,11 @@ function closeProjectModal() {
   activeProjectCard?.classList.remove('is-open');
   activeProjectCard?.setAttribute('aria-expanded', 'false');
   activeProjectCard = null;
+  lastProjectTrigger?.focus();
+  lastProjectTrigger = null;
 }
+
+projectModal?.addEventListener('keydown', (event) => keepModalFocusInside(event, projectModal));
 
 function initializeProjectCarousel(card) {
   const carousel = card.querySelector('.project-media-stack');
@@ -520,15 +589,7 @@ if (closeProjectModalBtn) {
 }
 
 if (projectModalCta) {
-  projectModalCta.addEventListener('click', (event) => {
-    event.preventDefault();
-    closeProjectModal();
-    const estimator = document.getElementById('estimator');
-    if (estimator) {
-      estimator.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    window.location.hash = 'estimator';
-  });
+  projectModalCta.addEventListener('click', closeProjectModal);
 }
 
 if (projectModal) {
@@ -538,6 +599,10 @@ if (projectModal) {
 }
 
 document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
+    setPrimaryNavigationOpen(false);
+    menuToggle.focus();
+  }
   if (event.key === 'Escape' && reelModal?.classList.contains('is-open')) {
     closeReelModal();
   }
@@ -546,24 +611,9 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-const heroTypeButtons = Array.from(document.querySelectorAll('.hero-estimator-type'));
-heroTypeButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const rate = Number(btn.dataset.rate);
-    selectedRate = rate;
-
-    heroTypeButtons.forEach((b) => b.classList.toggle('is-selected', b === btn));
-
-    document.querySelectorAll('.type-opt').forEach((opt) => {
-      const isSelected = Number(opt.dataset.rate) === rate;
-      opt.classList.toggle('active', isSelected);
-      opt.setAttribute('aria-pressed', String(isSelected));
-    });
-  });
-});
-
 window.addEventListener('scroll', () => {
   if (!header) return;
+  if (header.classList.contains('has-open-nav')) return;
 
   const currentScrollY = window.scrollY;
   const scrollingDown = currentScrollY > lastScrollY;
@@ -577,86 +627,15 @@ window.addEventListener('scroll', () => {
   } else {
     header.classList.remove('is-hidden');
     header.classList.add('is-light');
-    closeServiceCards();
   }
 
   lastScrollY = currentScrollY;
 });
 
-const slideHold = 2000;
-setInterval(() => {
-  showHeroSlide(heroIndex + 1);
-}, slideHold);
-
-function selectType(el){
-  document.querySelectorAll('.type-opt').forEach((option) => {
-    const isSelected = option === el;
-    option.classList.toggle('active', isSelected);
-    option.setAttribute('aria-pressed', String(isSelected));
-  });
-  selectedRate = Number.parseInt(el.getAttribute('data-rate'), 10);
-
-  const matchingHeroType = heroTypeButtons.find((btn) => Number(btn.dataset.rate) === selectedRate);
-  if (matchingHeroType) {
-    heroTypeButtons.forEach((btn) => btn.classList.toggle('is-selected', btn === matchingHeroType));
-  }
-}
-
-document.querySelectorAll('.type-opt').forEach((option) => {
-  option.addEventListener('click', () => selectType(option));
-});
-
-function formatLakh(num) {
-  return (num / 100000).toFixed(1) + ' lac';
-}
-
-function calculate() {
-  const plotSizeInput = document.getElementById('plotSize');
-  const plotSize = Number.parseFloat(plotSizeInput.value);
-  const resultEmpty = document.getElementById('resultEmpty');
-  const resultBox = document.getElementById('resultBox');
-
-  if (!Number.isFinite(plotSize) || plotSize <= 0) {
-    plotSizeInput.focus();
-    plotSizeInput.style.borderColor = 'var(--gold-500)';
-    return;
-  }
-
-  plotSizeInput.style.borderColor = '';
-  const floors = Number.parseInt(document.getElementById('floors').value, 10);
-  const coveredArea = plotSize * 9 * 0.85 * floors;
-  const midCost = coveredArea * selectedRate;
-  const lowCost = midCost * 0.9;
-  const highCost = midCost * 1.1;
-
-  resultEmpty.hidden = true;
-  resultBox.hidden = false;
-  document.getElementById('resultRange').textContent =
-    `Rs ${formatLakh(lowCost)} – Rs ${formatLakh(highCost)}`;
-  document.getElementById('resultArea').textContent =
-    `Estimated covered area: ${Math.round(coveredArea).toLocaleString('en-US')} sq. ft.`;
-  document.getElementById('resultRate').textContent =
-    `Estimated rate: Rs ${selectedRate.toLocaleString('en-US')} / sq. ft.`;
-  window._lastEstimate = {
-    plotSize,
-    floors,
-    selectedRate,
-    lowCost,
-    highCost
-  };
-}
-
-function sendToWhatsApp() {
-  const location = document.getElementById('location').value;
-  const estimate = window._lastEstimate;
-  if (!estimate) return;
-
-  const constructionType = estimate.selectedRate === 2500
-    ? 'Grey Structure with material'
-    : 'Complete / Turnkey with material';
-  const floorsLabel = ['Ground Floor', 'Ground + 1', 'Ground + 2'][estimate.floors - 1] || 'Ground + 1';
-  const message = `Hi AMKO, I'd like a personalized estimate.\nLocation: ${location}\nPlot size: ${estimate.plotSize} sq. yd.\nFloors: ${floorsLabel}\nConstruction type: ${constructionType}`;
-  window.open(`https://wa.me/923222538025?text=${encodeURIComponent(message)}`, '_blank');
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  setInterval(() => {
+    showHeroSlide(heroIndex + 1);
+  }, 5500);
 }
 
 function sendContactForm(){
