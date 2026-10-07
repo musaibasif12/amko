@@ -1018,8 +1018,9 @@ video::-webkit-media-controls-overflow-button {
   bottom: 0;
   left: 0;
   height: auto;
-  min-height: 96px;
+  min-height: 112px;
   padding-top: 34px;
+  padding-bottom: 28px;
   background: linear-gradient(0deg, rgba(5, 5, 6, 0.96), rgba(5, 5, 6, 0));
 }
 
