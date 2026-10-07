@@ -229,15 +229,21 @@
         </div>
 
         <div class="media-spotlight">
-          <div class="video-placeholder media-box spotlight-media" tabindex="0" role="button" data-reel-title="Construction video" data-reel-copy="Site walkthrough / progress reel" aria-label="Open construction video">
-            <div class="media-tag">Construction video</div>
-            <div class="media-label">Need: site walkthrough / progress reel</div>
+          <div class="video-placeholder media-box spotlight-media" tabindex="0" role="button" data-video-src="./outdoor.mp4" data-reel-title="Outdoor home" data-reel-copy="Completed home — outdoor view" aria-label="Open outdoor view of completed home">
+            <video class="spotlight-video" muted autoplay loop playsinline preload="metadata" aria-label="Outdoor view of completed home">
+              <source src="./outdoor.mp4" type="video/mp4" />
+            </video>
+            <div class="media-tag">Outdoor</div>
+            <div class="media-label">Completed home — outdoor view</div>
             <span class="reel-capture" aria-hidden="true"><svg class="icon"><use href="#ic-capture" /></svg></span>
           </div>
 
-          <div class="project-media-placeholder media-box spotlight-media" tabindex="0" role="button" data-reel-title="Project photos" data-reel-copy="Completed project photos" aria-label="Open project photos">
-            <div class="media-tag">Project photos</div>
-            <div class="media-label">Need: completed project photos</div>
+          <div class="project-media-placeholder media-box spotlight-media" tabindex="0" role="button" data-video-src="./indoor.mp4" data-reel-title="Indoor home" data-reel-copy="Completed home — indoor view" aria-label="Open indoor view of completed home">
+            <video class="spotlight-video" muted autoplay loop playsinline preload="metadata" aria-label="Indoor view of completed home">
+              <source src="./indoor.mp4" type="video/mp4" />
+            </video>
+            <div class="media-tag">Indoor</div>
+            <div class="media-label">Completed home — indoor view</div>
             <span class="reel-capture" aria-hidden="true"><svg class="icon"><use href="#ic-capture" /></svg></span>
           </div>
 
@@ -245,25 +251,25 @@
 
         <div class="reel-grid">
           <article class="reel-card media-box" tabindex="0" role="button" data-video-src="./1.mp4" data-reel-title="AMKO Reel" data-reel-copy="Short project reel / Instagram story" aria-label="Open AMKO Reel">
-            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" aria-hidden="true"></video>
+            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" controlslist="nofullscreen nodownload noplaybackrate noremoteplayback" disablepictureinpicture aria-hidden="true"></video>
             <div class="media-tag">AMKO Reel</div>
             <div class="media-label">Short project reel / Instagram story</div>
             <span class="reel-capture" aria-hidden="true"><svg class="icon"><use href="#ic-capture" /></svg></span>
           </article>
           <article class="reel-card media-box" tabindex="0" role="button" data-video-src="./2.mp4" data-reel-title="Workmanship close-up" data-reel-copy="Material / finish / detail close-up" aria-label="Open Workmanship close-up reel">
-            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" aria-hidden="true"></video>
+            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" controlslist="nofullscreen nodownload noplaybackrate noremoteplayback" disablepictureinpicture aria-hidden="true"></video>
             <div class="media-tag">Workmanship close-up</div>
             <div class="media-label">Material / finish / detail close-up</div>
             <span class="reel-capture" aria-hidden="true"><svg class="icon"><use href="#ic-capture" /></svg></span>
           </article>
           <article class="reel-card media-box" tabindex="0" role="button" data-video-src="./3.mp4" data-reel-title="Engineer on site" data-reel-copy="Supervision / site inspection photo" aria-label="Open Engineer on site reel">
-            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" aria-hidden="true"></video>
+            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" controlslist="nofullscreen nodownload noplaybackrate noremoteplayback" disablepictureinpicture aria-hidden="true"></video>
             <div class="media-tag">Engineer on site</div>
             <div class="media-label">Supervision / site inspection</div>
             <span class="reel-capture" aria-hidden="true"><svg class="icon"><use href="#ic-capture" /></svg></span>
           </article>
           <article class="reel-card media-box" tabindex="0" role="button" data-video-src="./4.mp4" data-reel-title="Project walkthrough" data-reel-copy="Completed home walkthrough video" aria-label="Open Project walkthrough reel">
-            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" aria-hidden="true"></video>
+            <video class="reel-preview" data-reel-preview muted playsinline loop preload="none" controlslist="nofullscreen nodownload noplaybackrate noremoteplayback" disablepictureinpicture aria-hidden="true"></video>
             <div class="media-tag">Project walkthrough</div>
             <div class="media-label">Completed home walkthrough video</div>
             <span class="reel-capture" aria-hidden="true"><svg class="icon"><use href="#ic-capture" /></svg></span>
@@ -691,7 +697,7 @@
       <section class="reel-modal-panel" role="dialog" aria-modal="true" aria-labelledby="reelModalTitle">
         <button class="reel-modal-close" id="closeReelModal" type="button" aria-label="Close reel">×</button>
         <div class="reel-modal-video" id="reelModalVideo">
-          <video class="reel-modal-player" id="reelModalPlayer" controls playsinline hidden></video>
+          <video class="reel-modal-player" id="reelModalPlayer" controls controlslist="nofullscreen nodownload noplaybackrate noremoteplayback" disablepictureinpicture playsinline hidden></video>
           <div class="reel-modal-placeholder">
             <span class="reel-modal-label">AMKO ON SITE</span>
           </div>

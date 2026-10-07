@@ -791,6 +791,32 @@ section > * {
 
 .spotlight-media .reel-capture .icon { width: 18px; height: 18px; stroke-width: 1.45; }
 
+.spotlight-video {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #050506;
+  accent-color: var(--gold-500);
+}
+
+.spotlight-media > .media-tag,
+.spotlight-media > .media-label,
+.spotlight-media > .reel-capture {
+  z-index: 1;
+}
+
+video::-webkit-media-controls-timeline {
+  accent-color: var(--gold-500);
+}
+
+video::-webkit-media-controls-fullscreen-button,
+video::-webkit-media-controls-overflow-button {
+  display: none;
+}
+
 .video-placeholder {
   min-height: 360px;
   background:
@@ -960,7 +986,7 @@ section > * {
 
 .reel-modal-panel {
   position: relative;
-  width: min(45dvh, calc(100vw - 32px));
+  width: min(calc(45dvh - 63px), calc(100vw - 32px));
   height: 80dvh;
   max-height: 80vh;
   padding: 0;
@@ -1013,6 +1039,7 @@ section > * {
   height: 100%;
   object-fit: contain;
   background: #050506;
+  accent-color: var(--gold-500);
 }
 
 .reel-modal-player[hidden] {
@@ -1067,6 +1094,7 @@ section > * {
   .reel-modal-panel {
     height: calc(100dvh - 24px);
     max-height: calc(100vh - 24px);
+    width: min(calc(56.25dvh - 76.5px), calc(100vw - 32px));
   }
 
   .reel-modal-panel.is-landscape {
@@ -5265,7 +5293,10 @@ body > section[id] {
     padding: 12px;
   }
 
-  .reel-modal-panel,
+  .reel-modal-panel:not(.is-landscape) {
+    width: min(calc(45dvh - 63px), calc(100vw - 24px));
+  }
+
   .reel-modal-panel.is-landscape {
     width: min(100%, calc(100vw - 40px));
     max-width: 100%;
@@ -5295,6 +5326,12 @@ body > section[id] {
 @media (max-width: 480px) {
   .input-combo {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 700px) and (max-height: 620px) {
+  .reel-modal-panel:not(.is-landscape) {
+    width: min(calc(56.25dvh - 76.5px), calc(100vw - 24px));
   }
 }
 

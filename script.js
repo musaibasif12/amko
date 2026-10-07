@@ -79,6 +79,7 @@ function openReelModal(reelCard) {
   if (!reelModal) return;
 
   lastReelTrigger = reelCard;
+  setSpotlightVideosActive(false);
   setReelPreviewsActive(false);
   const title = reelCard.dataset.reelTitle || 'AMKO Reel';
   const copy = reelCard.dataset.reelCopy || '';
@@ -91,6 +92,9 @@ function openReelModal(reelCard) {
   );
   if (reelModalPlayer && reelModalPlaceholder) {
     reelModalPlayer.pause();
+    reelModalPlayer.loop = false;
+    reelModalPlayer.muted = false;
+    reelModalPlayer.controls = Boolean(videoSrc);
     reelModalPlayer.hidden = !videoSrc;
     reelModalPlaceholder.hidden = Boolean(videoSrc);
     if (videoSrc) {
@@ -123,9 +127,12 @@ function closeReelModal() {
     reelModalPlayer.pause();
     reelModalPlayer.removeAttribute('src');
     reelModalPlayer.load();
+    reelModalPlayer.controls = false;
+    reelModalPlayer.muted = true;
     reelModalPlayer.hidden = true;
     reelModalPlaceholder.hidden = false;
   }
+  setSpotlightVideosActive(true);
   setReelPreviewsActive(true);
   lastReelTrigger?.focus();
 }
@@ -139,6 +146,50 @@ reelCards.forEach((card) => {
     }
   });
 });
+
+const spotlightVideoObserver = 'IntersectionObserver' in window
+  ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.muted = true;
+          if (video.paused) {
+            video.play().catch((error) => {
+              if (!['AbortError', 'NotAllowedError'].includes(error.name)) {
+                console.error('Unable to play completed-home video preview.', error);
+              }
+            });
+          }
+        } else if (!video.paused) {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '50px' })
+  : null;
+
+function setSpotlightVideosActive(isActive) {
+  document.querySelectorAll('.spotlight-video').forEach((video) => {
+    if (!isActive) {
+      video.pause();
+      spotlightVideoObserver?.unobserve(video);
+      return;
+    }
+
+    video.muted = true;
+    video.loop = true;
+    if (spotlightVideoObserver) {
+      spotlightVideoObserver.observe(video);
+    } else if (video.paused) {
+      video.play().catch((error) => {
+        if (!['AbortError', 'NotAllowedError'].includes(error.name)) {
+          console.error('Unable to play completed-home video preview.', error);
+        }
+      });
+    }
+  });
+}
+
+setSpotlightVideosActive(true);
 
 const reelPreviewObserver = 'IntersectionObserver' in window
   ? new IntersectionObserver((entries) => {
