@@ -16,6 +16,10 @@ const reelModal = document.getElementById('reelModal');
 const closeReelModalBtn = document.getElementById('closeReelModal');
 const reelModalPlayer = document.getElementById('reelModalPlayer');
 const reelModalPlaceholder = reelModal?.querySelector('.reel-modal-placeholder');
+const whatsappFloat = document.querySelector('.whatsapp-float');
+const whatsappFloatMessage = whatsappFloat?.querySelector('.whatsapp-float-message');
+const backToTopButton = document.querySelector('.back-to-top');
+const heroSection = document.querySelector('.hero');
 let lastReelTrigger = null;
 
 let heroIndex = 0;
@@ -23,6 +27,51 @@ let lastScrollY = window.scrollY;
 let activeProjectCard = null;
 let lastProjectTrigger = null;
 let lastServiceTrigger = null;
+
+function setBackToTopVisibility(isVisible) {
+  if (!backToTopButton) return;
+
+  backToTopButton.hidden = !isVisible;
+  backToTopButton.setAttribute('aria-hidden', String(!isVisible));
+  backToTopButton.tabIndex = isVisible ? 0 : -1;
+}
+
+if (backToTopButton && heroSection) {
+  const updateBackToTopVisibility = () => {
+    setBackToTopVisibility(heroSection.getBoundingClientRect().bottom <= 0);
+  };
+  window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+  window.addEventListener('resize', updateBackToTopVisibility);
+  updateBackToTopVisibility();
+
+  backToTopButton.addEventListener('click', () => {
+    heroSection.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'auto'
+        : 'smooth',
+      block: 'start',
+    });
+  });
+}
+
+if (whatsappFloat && whatsappFloatMessage) {
+  const revealWhatsAppPrompt = () => {
+    whatsappFloatMessage.setAttribute('aria-hidden', 'false');
+    whatsappFloat.classList.add('is-prompt-visible');
+    window.setTimeout(() => {
+      whatsappFloatMessage.setAttribute('aria-hidden', 'true');
+      whatsappFloat.classList.remove('is-prompt-visible');
+      window.setTimeout(revealWhatsAppPrompt, 6000);
+    }, 4200);
+  };
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    whatsappFloatMessage.setAttribute('aria-hidden', 'false');
+    whatsappFloat.classList.add('is-prompt-visible');
+  } else {
+    window.setTimeout(revealWhatsAppPrompt, 4000);
+  }
+}
 
 function setPrimaryNavigationOpen(isOpen) {
   if (!menuToggle || !primaryNavigation) return;
@@ -146,6 +195,38 @@ reelCards.forEach((card) => {
     }
   });
 });
+
+const reelGrid = document.querySelector('.reel-grid');
+const reelPageCards = Array.from(reelGrid?.querySelectorAll('.reel-card') || []);
+const reelPageButtons = Array.from(document.querySelectorAll('[data-reel-page]'));
+const reelPageStatus = document.querySelector('.reel-page-status');
+const reelsPerPage = 4;
+const reelPageCount = Math.ceil(reelPageCards.length / reelsPerPage);
+let currentReelPage = 0;
+
+function showReelPage(pageIndex) {
+  if (!reelPageCards.length || !reelPageCount) return;
+
+  currentReelPage = Math.max(0, Math.min(pageIndex, reelPageCount - 1));
+  reelPageCards.forEach((card, index) => {
+    card.hidden = Math.floor(index / reelsPerPage) !== currentReelPage;
+  });
+  reelPageStatus.textContent = `${currentReelPage + 1} / ${reelPageCount}`;
+  reelPageButtons.forEach((button) => {
+    button.disabled =
+      (button.dataset.reelPage === 'previous' && currentReelPage === 0) ||
+      (button.dataset.reelPage === 'next' && currentReelPage === reelPageCount - 1);
+    button.classList.toggle('is-suggested', !button.disabled);
+  });
+}
+
+reelPageButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    showReelPage(currentReelPage + (button.dataset.reelPage === 'next' ? 1 : -1));
+  });
+});
+
+showReelPage(0);
 
 const spotlightVideoObserver = 'IntersectionObserver' in window
   ? new IntersectionObserver((entries) => {
@@ -385,7 +466,7 @@ const projectDetails = {
     story: 'A 400 sq yd residential build in Naya Nazimabad, delivered as a fully finished turnkey project. AMKO handled everything from grey structure to final finishing, including flooring, electrical, plumbing and interior completion.',
     includes: ['Structural work','Electrical & plumbing','Flooring & tiling','Paint & finishing','Kitchen & bathroom completion'],
     images: [
-      'https://picsum.photos/seed/amko-proj-1/900/620',
+      './3.webp',
       'https://picsum.photos/seed/amko-proj-2/900/620',
       'https://picsum.photos/seed/amko-proj-3/900/620',
       'https://picsum.photos/seed/amko-proj-4/900/620'
@@ -401,7 +482,7 @@ const projectDetails = {
     story: 'A compact family residence in Naya Nazimabad, Block A built with a practical layout and complete finishing scope. The project included grey structure works, electrical rough-in, plumbing and final internal fit-out.',
     includes: ['Structural work','Electrical rough-in','Plumbing network','Tiling & flooring','Paint & finishing'],
     images: [
-      'https://picsum.photos/seed/amko-proj-2/900/620',
+      './2.webp',
       'https://picsum.photos/seed/amko-proj-3/900/620',
       'https://picsum.photos/seed/amko-proj-4/900/620',
       'https://picsum.photos/seed/amko-proj-1/900/620'
@@ -417,7 +498,7 @@ const projectDetails = {
     story: 'A complete residential project in Meerut Society developed with durable materials and coordinated finishing. AMKO supervised the structure, services and final home-ready finishes for a more predictable delivery process.',
     includes: ['Structural work','Brickwork & plaster','Electrical & plumbing','Flooring & finishing','Internal fixtures'],
     images: [
-      'https://picsum.photos/seed/amko-proj-3/900/620',
+      './4.webp',
       'https://picsum.photos/seed/amko-proj-4/900/620',
       'https://picsum.photos/seed/amko-proj-5/900/620',
       'https://picsum.photos/seed/amko-proj-2/900/620'
